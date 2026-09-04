@@ -1,0 +1,143 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lifecontext.dev/schemas/lifecontext-0.1.json",
+  "title": "LifeContext L1",
+  "type": "object",
+  "required": ["schema_version", "person", "consents", "sources", "evidence", "thought_cells", "mindcopies"],
+  "properties": {
+    "schema_version": { "const": "0.1.0" },
+    "person": { "$ref": "#/$defs/person" },
+    "consents": { "type": "array", "items": { "$ref": "#/$defs/consent" } },
+    "sources": { "type": "array", "items": { "$ref": "#/$defs/source" } },
+    "evidence": { "type": "array", "items": { "$ref": "#/$defs/evidence" } },
+    "thought_cells": { "type": "array", "items": { "$ref": "#/$defs/thoughtCell" } },
+    "mindcopies": { "type": "array", "items": { "$ref": "#/$defs/mindcopy" } }
+  },
+  "$defs": {
+    "person": {
+      "type": "object",
+      "required": ["id", "display_name"],
+      "properties": {
+        "id": { "type": "string" },
+        "display_name": { "type": "string" },
+        "birth_date": { "type": "string", "format": "date" },
+        "timezone": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "consent": {
+      "type": "object",
+      "required": ["id", "grantor_id", "purposes", "status", "granted_at"],
+      "properties": {
+        "id": { "type": "string" },
+        "grantor_id": { "type": "string" },
+        "grantee_id": { "type": "string" },
+        "purposes": { "type": "array", "items": { "enum": ["store", "analyze", "retrieve", "train", "share", "act"] } },
+        "scope": { "type": "array", "items": { "type": "string" } },
+        "status": { "enum": ["active", "revoked", "expired"] },
+        "granted_at": { "type": "string", "format": "date-time" },
+        "expires_at": { "type": "string", "format": "date-time" }
+      },
+      "additionalProperties": false
+    },
+    "source": {
+      "type": "object",
+      "required": ["id", "media_type", "content_hash", "owner_id", "captured_at"],
+      "properties": {
+        "id": { "type": "string" },
+        "media_type": { "enum": ["text", "audio", "image", "video", "behavior", "document"] },
+        "uri": { "type": "string" },
+        "content_hash": { "type": "string" },
+        "owner_id": { "type": "string" },
+        "participant_ids": { "type": "array", "items": { "type": "string" } },
+        "captured_at": { "type": "string", "format": "date-time" },
+        "sensitivity": { "enum": ["public", "private", "sensitive", "restricted"] },
+        "consent_ids": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": false
+    },
+    "evidence": {
+      "type": "object",
+      "required": ["id", "source_id", "locator", "content", "speaker_type"],
+      "properties": {
+        "id": { "type": "string" },
+        "source_id": { "type": "string" },
+        "locator": { "type": "string", "description": "Page, timestamp, byte range or message id." },
+        "content": { "type": "string" },
+        "speaker_type": { "enum": ["subject", "third_party", "model", "unknown"] },
+        "recorded_at": { "type": "string", "format": "date-time" },
+        "processing": {
+          "type": "object",
+          "properties": {
+            "method": { "type": "string" },
+            "model": { "type": "string" },
+            "confidence": { "type": "number", "minimum": 0, "maximum": 1 }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "thoughtCell": {
+      "type": "object",
+      "required": ["id", "kind", "content", "evidence_ids", "review_status", "created_at"],
+      "properties": {
+        "id": { "type": "string" },
+        "kind": { "enum": ["expression", "event", "claim", "preference", "decision", "reflection", "cognitive_shift"] },
+        "content": { "type": "string" },
+        "evidence_ids": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "occurred_from": { "type": "string", "format": "date-time" },
+        "occurred_to": { "type": "string", "format": "date-time" },
+        "context": {
+          "type": "object",
+          "properties": {
+            "location": { "type": "string" },
+            "participant_ids": { "type": "array", "items": { "type": "string" } },
+            "emotion": { "type": "array", "items": { "type": "string" } },
+            "intent": { "type": "array", "items": { "type": "string" } },
+            "life_phase": { "type": "string" }
+          },
+          "additionalProperties": false
+        },
+        "relations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["target_id", "relation_type", "epistemic_status"],
+            "properties": {
+              "target_id": { "type": "string" },
+              "relation_type": { "enum": ["references", "supports", "contradicts", "influenced_by", "evolves_from", "spawned"] },
+              "epistemic_status": { "enum": ["observed", "reported", "inferred", "disputed"] },
+              "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+              "evidence_ids": { "type": "array", "items": { "type": "string" } }
+            },
+            "additionalProperties": false
+          }
+        },
+        "review_status": { "enum": ["unreviewed", "accepted", "edited", "rejected", "disputed"] },
+        "created_at": { "type": "string", "format": "date-time" }
+      },
+      "additionalProperties": false
+    },
+    "mindcopy": {
+      "type": "object",
+      "required": ["id", "version", "person_id", "status", "derived_from", "created_at"],
+      "properties": {
+        "id": { "type": "string" },
+        "version": { "type": "string" },
+        "person_id": { "type": "string" },
+        "status": { "enum": ["draft", "reviewed", "signed", "revoked"] },
+        "identity": { "type": "object" },
+        "values": { "type": "array", "items": { "type": "object" } },
+        "style": { "type": "object" },
+        "memory_index": { "type": "array", "items": { "type": "string" } },
+        "runtime_policy": { "type": "object" },
+        "derived_from": { "type": "array", "items": { "type": "string" } },
+        "created_at": { "type": "string", "format": "date-time" },
+        "signed_by": { "type": "string" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

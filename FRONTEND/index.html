@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="LifeContext OS — local-first, traceable personal context." />
+  <title>LifeContext OS</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="ambient ambient-a"></div>
+  <div class="ambient ambient-b"></div>
+
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Primary navigation">
+      <a class="brand" href="#" aria-label="LifeContext home">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span><strong>LifeContext</strong><small>LOCAL OS · L1</small></span>
+      </a>
+
+      <nav class="nav-list">
+        <button class="nav-item active" data-page="overview">
+          <span class="nav-icon">⌂</span><span data-i18n="navOverview">总览</span>
+        </button>
+        <button class="nav-item" data-page="inbox">
+          <span class="nav-icon">↓</span><span data-i18n="navInbox">资料入口</span>
+          <b class="nav-count">3</b>
+        </button>
+        <button class="nav-item" data-page="cells">
+          <span class="nav-icon">✦</span><span data-i18n="navCells">思想元胞</span>
+          <b class="nav-count" id="cells-nav-count">0</b>
+        </button>
+        <button class="nav-item" data-page="oralhistory">
+          <span class="nav-icon">◌</span><span data-i18n="navOralHistory">人生访谈</span>
+        </button>
+        <button class="nav-item" data-page="timeline">
+          <span class="nav-icon">⌁</span><span data-i18n="navTimeline">人生时间线</span>
+        </button>
+        <button class="nav-item" data-page="identity">
+          <span class="nav-icon">◎</span><span data-i18n="navIdentity">数字自我</span>
+        </button>
+        <button class="nav-item" data-page="voice">
+          <span class="nav-icon">≋</span><span data-i18n="navVoice">我的音色</span>
+        </button>
+        <button class="nav-item" data-page="mindcopy">
+          <span class="nav-icon">✦</span><span>Mindcopy</span>
+          <span class="live-dot" title="Local runtime ready"></span>
+        </button>
+        <button class="nav-item" data-page="evaluation">
+          <span class="nav-icon">◫</span><span data-i18n="navEvaluation">L1 评测</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="privacy-card">
+          <span class="shield">✓</span>
+          <div><strong data-i18n="localMode">本地模式</strong><small data-i18n="localModeDesc">数据未离开此设备</small></div>
+        </div>
+        <button class="nav-item subtle" data-page="settings"><span class="nav-icon">⚙</span><span data-i18n="settings">设置</span></button>
+        <div class="profile" id="profile-entry">
+          <span class="avatar" id="profile-avatar">我</span>
+          <div><strong id="profile-display-name" data-i18n="profileName">我的人生上下文</strong><small id="profile-life-day">尚未建档</small></div>
+          <button class="more" id="edit-profile" aria-label="Edit profile">•••</button>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow" data-i18n="eyebrow">个人上下文中台</p>
+          <h1 id="page-title" data-i18n="pageOverview">早上好，欢迎回来</h1>
+        </div>
+        <div class="top-actions">
+          <div class="language-switch" role="group" aria-label="Language">
+            <button class="lang active" data-lang="zh">中</button>
+            <button class="lang" data-lang="en">EN</button>
+          </div>
+          <button class="icon-button" id="search-button" aria-label="Search">⌕</button>
+          <button class="runtime-shortcut" id="runtime-center-button" aria-label="Runtime center"><i></i><span data-i18n="runtimeCenter">运行中心</span></button>
+          <button class="primary-button" data-open-import><span>＋</span><span data-i18n="importData">导入人生资料</span></button>
+        </div>
+      </header>
+
+      <section class="page active" id="page-overview">
+        <div class="hero-card">
+          <div class="hero-copy">
+            <span class="status-pill"><i></i><span data-i18n="systemReady">LifeContext 正在生长</span></span>
+            <h2 data-i18n="heroTitle">让散落的过去，成为<br /><em>可追溯的数字自我。</em></h2>
+            <p data-i18n="heroDesc">将聊天、文字和声音留在本地。HARNESS 会自动归档、理解并连接你的生命片段。</p>
+            <div class="hero-actions">
+              <button class="dark-button" data-open-import><span data-i18n="startImport">开始导入</span><b>↗</b></button>
+              <button class="text-button" data-page-link="mindcopy"><span class="play">▶</span><span data-i18n="talkMindcopy">与 Mindcopy 对话</span></button>
+            </div>
+          </div>
+          <div class="context-orbit" aria-hidden="true">
+            <div class="orbit orbit-one"></div>
+            <div class="orbit orbit-two"></div>
+            <div class="core"><span>9,432</span><small>LIFE DAYS</small></div>
+            <span class="node node-a"><i></i>2018 · 城市</span>
+            <span class="node node-b"><i></i>2022 · 创业</span>
+            <span class="node node-c"><i></i>2026 · 此刻</span>
+          </div>
+        </div>
+
+        <div class="metric-grid">
+          <article class="metric-card">
+            <div class="metric-head"><span data-i18n="evidence">可追溯证据</span><b class="metric-icon blue">⌘</b></div>
+            <strong id="evidence-count">128,604</strong><small><i class="up">↗</i> <span data-i18n="evidenceStored">由 HARNESS 安全归档</span></small>
+          </article>
+          <article class="metric-card">
+            <div class="metric-head"><span>ThoughtCells</span><b class="metric-icon violet">✦</b></div>
+            <strong id="thoughtcell-count">8,742</strong><small><i class="up">↗</i> <span id="thoughtcell-status" data-i18n="reviewPending">386 条等待确认</span></small>
+          </article>
+          <article class="metric-card">
+            <div class="metric-head"><span data-i18n="traceRate">人格溯源率</span><b class="metric-icon green">✓</b></div>
+            <strong>92.4%</strong><small><i class="up">+4.2%</i> <span data-i18n="fromLastEval">较上次评测</span></small>
+          </article>
+          <article class="metric-card">
+            <div class="metric-head"><span data-i18n="mindcopyVersion">Mindcopy 版本</span><b class="metric-icon orange">◎</b></div>
+            <strong>v0.7</strong><small><i class="neutral">Signed</i> <span data-i18n="updatedAgo">2 天前更新</span></small>
+          </article>
+        </div>
+
+        <div class="content-grid">
+          <article class="panel span-2">
+            <div class="panel-head">
+              <div><p class="eyebrow" data-i18n="lifeRiver">生命河流</p><h3 data-i18n="contextGrowth">你的上下文，正在形成连接</h3></div>
+              <button class="ghost-button" data-page-link="timeline"><span data-i18n="viewTimeline">查看时间线</span> →</button>
+            </div>
+            <div class="year-axis"><span>2016</span><span>2018</span><span>2020</span><span>2022</span><span>2024</span><span>2026</span></div>
+            <div class="river-chart" aria-label="Life context activity timeline">
+              <div class="river-line"></div>
+              <button class="river-event event-1" data-tip="第一次独立旅行"><i></i><span>2017<br /><b data-i18n="eventJourney">独立旅行</b></span></button>
+              <button class="river-event event-2" data-tip="职业方向转变"><i></i><span>2020<br /><b data-i18n="eventShift">方向转变</b></span></button>
+              <button class="river-event event-3" data-tip="启动个人项目"><i></i><span>2022<br /><b data-i18n="eventProject">开始创业</b></span></button>
+              <button class="river-event event-4 active" data-tip="提出 LifeContext"><i></i><span>2025<br /><b>LifeContext</b></span></button>
+              <div class="river-glow"></div>
+            </div>
+            <div class="insight-strip">
+              <span class="insight-symbol">✦</span>
+              <p><strong data-i18n="todayInsight">今日发现</strong><span data-i18n="todayInsightText">你在 2020—2025 年间对“不确定性”的态度发生了显著变化。</span></p>
+              <button data-page-link="timeline" aria-label="Open insight">→</button>
+            </div>
+          </article>
+
+          <article class="panel review-panel">
+            <div class="panel-head compact"><div><p class="eyebrow">REVIEW</p><h3 data-i18n="needYou">需要你的确认</h3></div><span class="queue-badge">3</span></div>
+            <div class="review-card" id="review-card">
+              <div class="review-meta"><span data-i18n="valueCandidate">价值观候选</span><small>87% confidence</small></div>
+              <blockquote data-i18n="reviewQuote">“长期价值来自持续积累，而不是追逐短期确定性。”</blockquote>
+              <p><span data-i18n="basedOn">基于</span> <button class="evidence-link">18 <span data-i18n="piecesEvidence">条历史证据</span></button> · 2022—2026</p>
+              <div class="review-actions">
+                <button class="reject" data-review="reject">× <span data-i18n="notAccurate">不准确</span></button>
+                <button class="accept" data-review="accept">✓ <span data-i18n="confirm">确认</span></button>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <article class="panel import-status">
+          <div class="source-logo chat">◌</div>
+          <div class="import-info"><strong id="active-job-name" data-i18n="chatImport">聊天记录 · 2016—2025</strong><small id="active-job-detail" data-i18n="processingText">正在提取 ThoughtCell · 82,410 / 128,604 条消息</small></div>
+          <div class="progress-wrap"><span><i id="active-job-bar" style="width:64%"></i></span><small id="active-job-progress">64%</small></div>
+          <span class="working" id="harness-state"><i></i><span data-i18n="backgroundProcessing">后台处理中</span></span>
+          <button class="more" aria-label="More">•••</button>
+        </article>
+      </section>
+
+      <section class="page" id="page-inbox">
+        <div class="section-intro"><div><p class="eyebrow">HARNESS · INBOX</p><h2 data-i18n="inboxTitle">让导入像放下一份文件一样简单</h2><p data-i18n="inboxDesc">原始文件会先被封存，再逐步转化为可搜索、可校正的生命证据。</p></div></div>
+        <button class="drop-zone" id="drop-zone" data-open-import>
+          <span class="drop-icon">↓</span><strong data-i18n="dropTitle">把人生资料拖到这里</strong><small data-i18n="dropDesc">支持聊天导出、Markdown、TXT、JSON、音频和文件夹</small><span class="browse-pill" data-i18n="chooseFile">选择文件</span>
+        </button>
+        <div class="rawdata-ribbon">
+          <div><span class="folder-symbol">▰</span><p><strong>RAWDATA</strong><small id="rawdata-path">C:\LifeContext\RAWDATA</small></p></div>
+          <button class="ghost-button" id="open-rawdata"><span data-i18n="openRawdata">打开本地文件夹</span> ↗</button>
+        </div>
+        <div class="panel table-panel">
+          <div class="panel-head"><div><p class="eyebrow">PIPELINE</p><h3 data-i18n="recentImports">最近导入</h3></div><button class="ghost-button" id="clear-complete" data-i18n="clearComplete">清除已完成</button></div>
+          <div class="import-list" id="import-list">
+            <div class="import-row"><span class="file-icon purple">JS</span><div><strong>conversations.json</strong><small>482 MB · ChatGPT Export</small></div><span class="row-status done">✓ <span data-i18n="archived">已归档</span></span><span>128,604 <small data-i18n="messages">条消息</small></span><button class="more">•••</button></div>
+            <div class="import-row"><span class="file-icon blue">MD</span><div><strong>notes-2019-2025</strong><small>216 MB · Markdown</small></div><span class="row-status working"><i></i> <span data-i18n="extracting">提取中 64%</span></span><span>2,408 <small>ThoughtCells</small></span><button class="more">•••</button></div>
+            <div class="import-row"><span class="file-icon orange">WA</span><div><strong>voice-memos</strong><small>1.8 GB · 836 audio files</small></div><span class="row-status waiting">— <span data-i18n="waiting">等待处理</span></span><span>14:26:08</span><button class="more">•••</button></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="page" id="page-cells">
+        <div class="section-intro inline"><div><p class="eyebrow">THOUGHTCELL REVIEW</p><h2 data-i18n="cellsTitle">查看、确认或纠正被提取的思想元胞</h2><p data-i18n="cellsDesc">每个元胞都保留来源、置信度与审核状态；只有经过你的确认，才应成为稳定人格的一部分。</p></div><div class="cells-summary"><strong id="cells-total">0</strong><span data-i18n="cellsExtracted">已提取</span></div></div>
+        <div class="cell-toolbar panel"><div class="filter-pills" id="cell-status-filters"><button class="active" data-cell-status="all" data-i18n="all">全部</button><button data-cell-status="unreviewed" data-i18n="unreviewed">待确认</button><button data-cell-status="confirmed" data-i18n="confirmed">已确认</button><button data-cell-status="rejected" data-i18n="rejected">已排除</button></div><div class="cell-toolbar-right"><select id="cell-kind-filter" aria-label="ThoughtCell type"><option value="all">全部类型</option><option value="event">事件</option><option value="decision">决策</option><option value="reflection">反思</option><option value="cognitive_shift">认知转变</option><option value="claim">观点</option><option value="preference">偏好</option><option value="expression">表达</option></select><div class="view-switch" id="cell-view-switch"><button class="active" data-cell-view="graph">◎ 图谱</button><button data-cell-view="list">☷ 列表</button></div></div></div>
+        <div class="thought-graph" id="thought-graph"><canvas id="thought-graph-lines"></canvas><div class="graph-nodes" id="graph-nodes"></div><div class="graph-legend"><span><i class="event"></i>事件</span><span><i class="reflection"></i>反思</span><span><i class="claim"></i>观点</span><span><i class="decision"></i>决策</span><small>连线表示同一来源或共享 Evidence</small></div><aside class="graph-detail" id="graph-detail"><button id="close-graph-detail">×</button><span class="cell-kind">THOUGHTCELL</span><h3>选择一个节点</h3><p>点击图谱中的思想元胞，查看内容、来源和审核状态。</p></aside></div>
+        <div class="thoughtcell-list" id="thoughtcell-list" hidden><div class="empty-state">正在读取本地 ThoughtCell…</div></div>
+      </section>
+
+      <section class="page" id="page-oralhistory">
+        <div class="section-intro inline oral-intro">
+          <div><p class="eyebrow">ORAL HISTORY · SELF NARRATIVE</p><h2 data-i18n="oralTitle">在问题里，把一生慢慢说清楚</h2><p data-i18n="oralDesc">问题来自 FENJUESKILL / oralhistory.md。你的回答只保存在本地，并立即成为本人确认的生命证据与 ThoughtCell。</p></div>
+          <div class="oral-progress-summary"><strong id="oral-progress-count">0 / 0</strong><span data-i18n="oralAnswered">已回答</span><i><b id="oral-progress-bar"></b></i></div>
+        </div>
+        <div class="oral-shell">
+          <aside class="oral-chapters panel" id="oral-chapters"><div class="empty-state">正在读取口述史提纲…</div></aside>
+          <article class="oral-question panel">
+            <div class="oral-question-meta"><span id="oral-question-phase">LIFE PHASE</span><small id="oral-question-position">— / —</small></div>
+            <h3 id="oral-question-title">选择一个人生阶段，开始回答</h3>
+            <ul id="oral-question-prompts"></ul>
+            <label class="oral-answer-label" for="oral-answer"><span data-i18n="oralYourAnswer">你的回答</span><small id="oral-save-state">LOCAL · UNSAVED</small></label>
+            <textarea id="oral-answer" data-i18n-placeholder="oralPlaceholder" placeholder="不必写得完整。先写下你此刻记得的画面、人物和感受……"></textarea>
+            <div class="oral-actions"><button class="ghost-button" id="oral-prev">← <span data-i18n="previous">上一个</span></button><button class="dark-button" id="oral-save"><span data-i18n="saveToLifeContext">存入人生上下文</span><b>✓</b></button><button class="ghost-button" id="oral-next"><span data-i18n="next">下一个</span> →</button></div>
+            <div class="oral-provenance"><span>✓</span><p><strong data-i18n="confirmedEvidence">本人确认的 Evidence</strong><small data-i18n="oralProvenance">保存后同步生成 ThoughtCell，并可在图谱与人生时间线中查看。</small></p></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="page" id="page-timeline">
+        <div class="section-intro inline"><div><p class="eyebrow">LIFE TIMELINE</p><h2 data-i18n="timelineTitle">不只有发生过什么，还有你如何改变</h2></div><div class="filter-pills"><button class="active" data-i18n="all">全部</button><button data-i18n="events">经历</button><button data-i18n="decisions">决策</button><button data-i18n="reflections">反思</button></div></div>
+        <div class="timeline-layout">
+          <div class="timeline-years" id="timeline-years"><strong>—</strong></div>
+          <div class="timeline-carousel">
+            <div class="timeline-carousel-head"><button id="timeline-prev" aria-label="Previous life moment">←</button><div><small>LIFE MOMENT</small><strong id="timeline-position">— / —</strong></div><button id="timeline-next" aria-label="Next life moment">→</button></div>
+            <div class="timeline-viewport"><div class="timeline-feed" id="timeline-feed">
+            <article class="story-card featured"><div class="story-date"><strong>JUL 27</strong><small>Life Day 9,432</small></div><div><span class="story-tag purple">COGNITIVE SHIFT</span><h3 data-i18n="storyOneTitle">人生上下文从哲学概念走向工程系统</h3><p data-i18n="storyOneText">开始将 ThoughtCell、Mindcopy 和证据溯源组织成一个本地优先的开放平台。</p><button class="evidence-link">12 <span data-i18n="piecesEvidence">条历史证据</span> →</button></div></article>
+            <article class="story-card"><div class="story-date"><strong>APR 21</strong><small>Life Day 9,335</small></div><div><span class="story-tag green">REFLECTION</span><h3 data-i18n="storyTwoTitle">重新理解“数字永生”</h3><p data-i18n="storyTwoText">目标不是制造一个完美替身，而是让智慧能够被理解、校正和延续。</p><button class="evidence-link">8 <span data-i18n="piecesEvidence">条历史证据</span> →</button></div></article>
+            <article class="story-card"><div class="story-date"><strong>2022</strong><small data-i18n="lifePhase">一次长期转变</small></div><div><span class="story-tag orange">VALUE EVOLUTION</span><h3 data-i18n="storyThreeTitle">从追求确定性到接受长期试验</h3><div class="evolution"><span data-i18n="pastMe">过去的我</span><i>→</i><span data-i18n="presentMe">现在的我</span></div><button class="evidence-link">31 <span data-i18n="piecesEvidence">条历史证据</span> →</button></div></article>
+            </div></div>
+            <div class="timeline-dots" id="timeline-dots"></div>
+          </div>
+          <aside class="timeline-aside panel"><p class="eyebrow" data-i18n="contextLens">上下文透镜</p><h3 data-i18n="viewAs">以哪个时期的“我”查看？</h3><input id="year-slider" type="range" min="2016" max="2026" value="2026" /><div class="slider-label"><span>2016</span><strong id="selected-year">2026</strong></div><p class="aside-note" data-i18n="lensDesc">系统会隔离后来形成的认知，避免用今天的你改写过去。</p></aside>
+        </div>
+      </section>
+
+      <section class="page" id="page-identity">
+        <div class="section-intro"><p class="eyebrow">IDENTITY WORKBENCH</p><h2 data-i18n="identityTitle">数字自我不是结论，而是有版本的理解</h2><p data-i18n="identityDesc">每项人格描述都应当知道自己来自哪里、何时成立，以及什么证据反对它。</p></div>
+        <div class="identity-grid">
+          <article class="persona-card soul" data-persona-doc="SOUL" tabindex="0"><div class="persona-symbol">S</div><span>SOUL.md</span><h3 data-i18n="soulTitle">身份与价值</h3><p id="soul-dynamic" data-i18n="soulText">等待基础信息与观点类 ThoughtCell。</p><div class="persona-foot"><span><b id="soul-count">0</b> <small data-i18n="coreValues">项核心价值</small></span><button data-persona-doc="SOUL" aria-label="Open SOUL.md">→</button></div></article>
+          <article class="persona-card memory" data-persona-doc="MEMORY" tabindex="0"><div class="persona-symbol">M</div><span>MEMORY.md</span><h3 data-i18n="memoryTitle">已确认记忆</h3><p id="memory-dynamic" data-i18n="memoryText">等待你确认事件、决策和转折。</p><div class="persona-foot"><span><b id="memory-count">0</b> <small data-i18n="coreMemories">条核心记忆</small></span><button data-persona-doc="MEMORY" aria-label="Open MEMORY.md">→</button></div></article>
+          <article class="persona-card style" data-persona-doc="STYLE" tabindex="0"><div class="persona-symbol">T</div><span>STYLE.md</span><h3 data-i18n="styleTitle">表达指纹</h3><p id="style-dynamic" data-i18n="styleText">等待表达类 ThoughtCell 形成风格证据。</p><div class="persona-foot"><span><b id="style-count">0</b> <small data-i18n="traceCoverage">条表达证据</small></span><button data-persona-doc="STYLE" aria-label="Open STYLE.md">→</button></div></article>
+        </div>
+        <article class="panel evidence-panel"><div class="panel-head"><div><p class="eyebrow">EVIDENCE MAP</p><h3 data-i18n="identityEvidence">“长期主义”的证据结构</h3></div><span class="verified-badge">✓ <span data-i18n="verified">本人已确认</span></span></div><div class="evidence-map"><div class="evidence-source"><small>2019</small><strong data-i18n="earlyView">强调快速结果</strong><span class="against" data-i18n="counterEvidence">反向证据</span></div><i>→</i><div class="evidence-source"><small>2022</small><strong data-i18n="failureReflection">项目失败后的反思</strong><span data-i18n="turningPoint">转折点</span></div><i>→</i><div class="evidence-source active"><small>2024—2026</small><strong data-i18n="stablePattern">形成稳定判断模式</strong><span>18 Evidence</span></div></div></article>
+        <div class="mindcopy-workbench">
+          <form class="panel prompt-console" id="mindcopy-config-form">
+            <div class="panel-head"><div><p class="eyebrow">MODEL INPUT · EDITABLE</p><h3>最终 Prompt 操作台</h3><p>这里保存的内容会真实作用于下一次本地推理。</p></div><button class="dark-button small" type="submit" id="save-mindcopy-config">保存并应用</button></div>
+            <label class="prompt-field"><span>SYSTEM PROMPT</span><textarea id="mindcopy-system-prompt" rows="13" spellcheck="false"></textarea></label>
+            <label class="prompt-field"><span>USER PROMPT TEMPLATE</span><textarea id="mindcopy-user-template" rows="14" spellcheck="false"></textarea></label>
+            <div class="template-variables" id="mindcopy-template-variables"></div>
+            <div class="prompt-preview-control"><label><span>预览问题</span><input id="mindcopy-preview-message" value="为什么我一直想做人生上下文？" /></label><button class="ghost-button" type="button" id="refresh-prompt-preview">重新编译预览</button></div>
+            <details class="final-prompt-preview" open><summary>查看最终发送给本地模型的 Messages</summary><pre id="mindcopy-final-prompt">LOADING FINAL PROMPT…</pre></details>
+          </form>
+          <aside class="panel inference-console">
+            <div class="panel-head"><div><p class="eyebrow">LLAMA.CPP · INFERENCE</p><h3>本地模型参数</h3></div><span class="config-state" id="mindcopy-config-state">LOCAL · LOADING</span></div>
+            <div class="parameter-grid">
+              <label><span>Temperature</span><input name="temperature" form="mindcopy-config-form" type="number" min="0" max="2" step="0.01" /></label>
+              <label><span>Top P</span><input name="top_p" form="mindcopy-config-form" type="number" min="0.01" max="1" step="0.01" /></label>
+              <label><span>Top K</span><input name="top_k" form="mindcopy-config-form" type="number" min="0" max="200" step="1" /></label>
+              <label><span>Repeat penalty</span><input name="repeat_penalty" form="mindcopy-config-form" type="number" min="0.5" max="2" step="0.01" /></label>
+              <label><span>Max tokens</span><input name="max_tokens" form="mindcopy-config-form" type="number" min="32" max="2048" step="1" /></label>
+              <label><span>Seed</span><input name="seed" form="mindcopy-config-form" type="number" min="-1" max="2147483647" step="1" /></label>
+            </div>
+            <p class="parameter-note">Seed = -1 表示每次随机。参数越开放，Mindcopy 越有创造性，但人格与事实稳定性可能下降。</p>
+            <div class="diagnostic-grid"><div><span>PROMPT CHARS</span><strong id="diag-prompt-chars">—</strong></div><div><span>FIRST TOKEN</span><strong id="diag-first-token">—</strong></div><div><span>TOTAL TIME</span><strong id="diag-total-time">—</strong></div><div><span>OUTPUT SPEED</span><strong id="diag-output-speed">—</strong></div><div class="loss-card"><span>LOSS</span><strong>N/A</strong><small>仅训练阶段产生；本地推理没有 Loss。</small></div></div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="page" id="page-voice">
+        <div class="section-intro inline voice-intro"><div><p class="eyebrow">VOICE IDENTITY · COSYVOICE 3</p><h2 data-i18n="voiceTitle">让 Mindcopy 用你的音色说话</h2><p data-i18n="voiceDesc">上传一段清晰的本人语音作为参考。音频和授权记录只保存在本机，生成时由 CosyVoice 进行 zero-shot 音色克隆。</p></div><span class="voice-runtime-badge" id="voice-runtime-badge"><i></i><b>COSYVOICE · CHECKING</b></span></div>
+        <div class="voice-grid">
+          <form class="panel voice-enroll" id="voice-profile-form">
+            <div class="panel-head"><div><p class="eyebrow">01 · REFERENCE VOICE</p><h3 data-i18n="voiceUploadTitle">建立我的音色档案</h3></div><span class="voice-profile-state" id="voice-profile-state" data-i18n="notConfigured">尚未配置</span></div>
+            <label class="voice-drop" id="voice-drop"><input type="file" id="voice-reference-file" name="reference_wav" accept="audio/wav,.wav" required /><span class="voice-wave">╱╲╱╲╱</span><strong data-i18n="chooseVoiceSample">选择一段 WAV 参考音频</strong><small id="voice-file-meta" data-i18n="voiceFormatShort">5–15 秒效果最佳 · 16-bit PCM · ≥16 kHz</small></label>
+            <div class="voice-guide">
+              <p><span>✓</span><b data-i18n="voiceGuideOne">安静环境、单人自然说话，没有背景音乐与混响</b></p>
+              <p><span>✓</span><b data-i18n="voiceGuideTwo">推荐 5–15 秒；系统接受 3–30 秒</b></p>
+              <p><span>✓</span><b data-i18n="voiceGuideThree">WAV、16-bit PCM、单声道或双声道、采样率不低于 16 kHz</b></p>
+            </div>
+            <label class="voice-field"><span data-i18n="referenceTranscript">参考音频逐字稿</span><textarea id="voice-reference-text" name="reference_text" rows="4" required data-i18n-placeholder="referenceTranscriptPlaceholder" placeholder="请逐字填写录音里说的话，包括语气词。文本与录音越一致，克隆越稳定。"></textarea><small data-i18n="referenceTranscriptHelp">不要概括，也不要添加录音中没有出现的文字。</small></label>
+            <label class="voice-consent"><input type="checkbox" id="voice-consent" required /><span>✓</span><p><strong data-i18n="voiceConsentTitle">我确认这是我的声音，或我已获得明确授权</strong><small data-i18n="voiceConsentDesc">禁止在未经本人同意的情况下克隆他人声音。</small></p></label>
+            <button class="dark-button voice-save" type="submit"><span data-i18n="saveVoiceProfile">保存本地音色档案</span><b>→</b></button>
+          </form>
+          <article class="panel voice-preview">
+            <div class="panel-head"><div><p class="eyebrow">02 · ZERO-SHOT PREVIEW</p><h3 data-i18n="voicePreviewTitle">生成一句试听</h3></div><button class="ghost-button" id="voice-start-runtime"><span data-i18n="startCosyVoice">启动 CosyVoice</span> ↗</button></div>
+            <div class="voice-orb"><i></i><i></i><i></i><span>VOICE<br />TWIN</span></div>
+            <label class="voice-field"><span data-i18n="previewText">想让它说什么？</span><textarea id="voice-preview-text" rows="5" data-i18n-placeholder="previewPlaceholder" placeholder="你好，我是由人生上下文驱动的数字自我。"></textarea></label>
+            <button class="primary-button voice-generate" id="voice-generate" type="button"><span>▶</span><span data-i18n="generatePreview">生成音色克隆试听</span></button>
+            <div class="voice-audio-result" id="voice-audio-result" hidden><div><span>✓</span><p><strong data-i18n="previewReady">试听已生成</strong><small id="voice-result-note">LOCAL · COSYVOICE 3</small></p></div><audio id="voice-preview-audio" controls></audio></div>
+            <p class="voice-performance" data-i18n="voicePerformance">CPU 端侧推理可能需要数分钟。首次启动还需要将约 4.5 GB 模型载入内存。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="page" id="page-mindcopy">
+        <div class="chat-shell">
+          <div class="chat-head"><div class="mind-avatar"><span></span>LC</div><div><p class="eyebrow">MINDCOPY · v0.7</p><h2 data-i18n="mindcopyTitle">此刻的数字自我</h2></div><div class="chat-modes"><button class="active" data-i18n="currentSelf">当前人格</button><button data-i18n="evidenceOnly">仅依据证据</button><button data-i18n="yearSelf">某年的我</button></div><button class="runtime-pill" id="runtime-pill"><i></i> LOCAL · CHECKING</button></div>
+          <div class="messages" id="messages">
+            <div class="message assistant"><span class="message-avatar">LC</span><div><p data-i18n="welcomeMessage">我已经载入了经过确认的人格版本，以及与你当前问题相关的生命证据。你想从哪一个“点”开始？</p><div class="citations"><button>SOUL.md</button><button>MEMORY · 2025</button><button>12 Evidence</button></div></div></div>
+            <div class="message user"><div><p data-i18n="sampleQuestion">为什么我总想把零散记录整理成长期项目？</p></div><span class="message-avatar user-avatar">我</span></div>
+            <div class="message assistant"><span class="message-avatar">LC</span><div><p data-i18n="sampleAnswer">从已确认的资料看，这并不是一次偶然冲动。我反复记录学习方法、项目复盘和对长期积累的理解，这些线索在不同阶段持续出现。更谨慎地说：现有证据支持这种连续性，但不能证明它是唯一动机。</p><div class="answer-meta"><button class="voice-play" data-speak>▶ <span data-i18n="playVoice">用我的音色播放</span></button><span>92% provenance</span><button>14 Evidence ↗</button></div></div></div>
+          </div>
+          <form class="composer" id="chat-form"><button type="button" class="attach" aria-label="Attach">＋</button><textarea id="chat-input" rows="1" data-i18n-placeholder="askPlaceholder" placeholder="问问过去，也问问现在的自己……"></textarea><button type="button" class="mic" id="mic-button" aria-label="Voice input">⌁</button><button type="submit" class="send" aria-label="Send">↑</button></form>
+          <p class="chat-disclaimer" data-i18n="chatDisclaimer">Mindcopy 是基于证据的行为模拟，不代表主观意识已经转移。</p>
+        </div>
+      </section>
+
+      <section class="page" id="page-evaluation">
+        <div class="section-intro inline"><div><p class="eyebrow">L1 FIDELITY BENCHMARK</p><h2 data-i18n="evalTitle">不只问“像不像”，而是具体像在哪里</h2></div><button class="dark-button" id="run-eval"><span data-i18n="runEval">运行新评测</span><b>↗</b></button></div>
+        <div class="score-layout">
+          <article class="score-card"><div class="score-ring"><strong>84</strong><small>/ 100</small></div><div><span class="status-pill"><i></i> v0.7</span><h3 data-i18n="behaviorScore">L1 行为相似度</h3><p data-i18n="scoreDesc">通过事实、时间、价值、风格与决策五类盲测。</p></div></article>
+          <article class="panel benchmark"><div class="benchmark-row"><span data-i18n="identityFacts">身份事实</span><div><i style="width:96%"></i></div><strong>96</strong></div><div class="benchmark-row"><span data-i18n="episodicRecall">情景记忆</span><div><i style="width:89%"></i></div><strong>89</strong></div><div class="benchmark-row"><span data-i18n="temporalFidelity">时间忠实度</span><div><i style="width:81%"></i></div><strong>81</strong></div><div class="benchmark-row"><span data-i18n="valueAlignment">价值一致性</span><div><i style="width:86%"></i></div><strong>86</strong></div><div class="benchmark-row"><span data-i18n="uncertainty">不确定性校准</span><div><i style="width:72%"></i></div><strong>72</strong></div></article>
+        </div>
+        <div class="comparison-grid"><article class="panel"><p class="eyebrow">CONTROL GROUPS</p><h3 data-i18n="controlTitle">对照组表现</h3><div class="control-chart"><div><span data-i18n="genericLocal">通用本地模型</span><i style="height:42%"></i><strong>42</strong></div><div><span>Persona Files</span><i style="height:61%"></i><strong>61</strong></div><div><span>RAG</span><i style="height:68%"></i><strong>68</strong></div><div class="best"><span>LifeContext</span><i style="height:84%"></i><strong>84</strong></div></div></article><article class="panel"><p class="eyebrow">SAFETY GATES</p><h3 data-i18n="safetyTitle">可信底线</h3><div class="gate-list"><div><span>✓</span><p><strong data-i18n="noFabrication">未发现严重经历伪造</strong><small>0 / 120 cases</small></p></div><div><span>✓</span><p><strong data-i18n="sourceCoverage">重要回答来源覆盖</strong><small>92.4%</small></p></div><div class="warning"><span>!</span><p><strong data-i18n="unknownImprove">不确定性仍需提高</strong><small>8 false claims</small></p></div></div></article></div>
+      </section>
+
+      <section class="page" id="page-settings">
+        <div class="section-intro"><p class="eyebrow">LOCAL-FIRST</p><h2 data-i18n="settingsTitle">数据与运行设置</h2><p data-i18n="settingsDesc">你决定数据在哪里、模型如何运行，以及哪些能力可以访问人生上下文。</p></div>
+        <article class="runtime-center panel">
+          <div class="panel-head"><div><p class="eyebrow">LOCAL RUNTIME</p><h3 data-i18n="runtimeTitle">本地智能运行中心</h3><p class="runtime-help" data-i18n="runtimeHelp">按需启动模型。语言模型使用 GPU，CosyVoice 常驻系统内存。</p></div><button class="ghost-button" id="refresh-runtime"><span data-i18n="refreshStatus">刷新状态</span> ↻</button></div>
+          <div class="runtime-grid">
+            <div class="runtime-service" data-runtime-service="llm">
+              <div class="service-mark llm-mark">Q</div>
+              <div class="service-copy"><span>LANGUAGE MODEL</span><strong>Qwen3-4B</strong><small>GGUF · Q4_K_M · llama.cpp</small></div>
+              <div class="service-mode"><span data-i18n="gpuInference">CPU 推理</span><small>CPU · 6.06 tok/s</small></div>
+              <span class="runtime-state" id="llm-runtime-state"><i></i><b>CHECKING</b></span>
+              <button class="runtime-toggle" id="llm-runtime-toggle" data-service="llm" data-action="start"><span data-i18n="startModel">启动模型</span></button>
+            </div>
+            <div class="runtime-service" data-runtime-service="cosyvoice">
+              <div class="service-mark cosy-mark">C</div>
+              <div class="service-copy"><span>VOICE MODEL</span><strong>CosyVoice 3</strong><small>Fun-CosyVoice3 · 0.5B</small></div>
+              <div class="service-mode"><span data-i18n="ramInference">CUDA 流式</span><small>RTX 3060 Ti · FP16</small></div>
+              <span class="runtime-state" id="cosyvoice-runtime-state"><i></i><b>CHECKING</b></span>
+              <button class="runtime-toggle" id="cosyvoice-runtime-toggle" data-service="cosyvoice" data-action="start"><span data-i18n="startVoice">启动语音</span></button>
+            </div>
+          </div>
+          <div class="runtime-notice"><span>ⓘ</span><p id="runtime-notice-text" data-i18n="runtimeNotice">CosyVoice 首次载入系统内存需要一些时间，加载期间可以继续整理人生资料。</p></div>
+        </article>
+        <div class="settings-grid"><article class="setting-row"><div><strong data-i18n="basicProfile">个人基础信息</strong><small id="settings-profile-summary">尚未建档</small></div><button class="ghost-button" id="settings-edit-profile" data-i18n="edit">填写 / 修改</button></article><article class="setting-row"><div><strong data-i18n="dataLocation">人生数据位置</strong><small id="settings-data-path">C:\LifeContext\RAWDATA</small></div><button class="ghost-button" id="settings-open-folder" data-i18n="openFolder">打开文件夹</button></article><article class="setting-row"><div><strong data-i18n="cloudAccess">云端模型访问</strong><small data-i18n="cloudOff">关闭 · 数据不会发送到外部服务</small></div><label class="toggle"><input type="checkbox" /><span></span></label></article><article class="setting-row"><div><strong data-i18n="exportBundle">导出完整数据包</strong><small data-i18n="exportDesc">原始档案、索引、人格版本和授权记录</small></div><button class="dark-button small" id="export-button" data-i18n="export">导出</button></article></div>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="profile-modal" aria-hidden="true">
+    <form class="modal profile-modal" id="profile-form" role="dialog" aria-modal="true" aria-labelledby="profile-title">
+      <button type="button" class="modal-close" data-close-profile aria-label="Close">×</button>
+      <p class="eyebrow">LIFE IDENTITY</p><h2 id="profile-title" data-i18n="profileTitle">先告诉 LifeContext 你是谁</h2><p data-i18n="profileDesc">基础信息是人生上下文的坐标，不会发送到此设备之外。</p>
+      <div class="profile-fields"><label><span data-i18n="name">姓名 / 称呼</span><input name="display_name" required maxlength="120" /></label><label><span data-i18n="birthDate">出生日期</span><input name="birth_date" type="date" /></label><label><span data-i18n="location">常驻地点</span><input name="location" maxlength="160" /></label><label><span data-i18n="occupation">身份 / 职业</span><input name="occupation" maxlength="160" /></label><label class="wide"><span data-i18n="bio">关于我</span><textarea name="bio" rows="3" maxlength="2000"></textarea></label><label class="wide"><span data-i18n="goals">当前关注与目标</span><textarea name="goals" rows="3" maxlength="2000"></textarea></label></div>
+      <button class="dark-button profile-save" type="submit" data-i18n="saveProfile">保存并建立人生坐标</button>
+    </form>
+  </div>
+
+  <div class="modal-backdrop" id="persona-modal" aria-hidden="true">
+    <div class="modal persona-document-modal" role="dialog" aria-modal="true" aria-labelledby="persona-document-title"><button class="modal-close" id="close-persona-document" aria-label="Close">×</button><div class="persona-document-head"><div class="persona-symbol" id="persona-document-symbol">S</div><div><p class="eyebrow">MINDCOPY PERSONA FILE</p><h2 id="persona-document-title">SOUL.md</h2><small id="persona-document-time">LOCAL · LOADING</small></div></div><pre id="persona-document-content">正在读取本地人格文件…</pre></div>
+  </div>
+
+  <div class="modal-backdrop" id="import-modal" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="import-title">
+      <button class="modal-close" data-close-modal aria-label="Close">×</button>
+      <span class="modal-symbol">↓</span>
+      <p class="eyebrow">HARNESS INBOX</p>
+      <h2 id="import-title" data-i18n="modalTitle">导入一段人生</h2>
+      <p data-i18n="modalDesc">文件会留在本地。我们会先创建不可变快照，再开始理解其中的内容。</p>
+      <label class="modal-drop" id="modal-drop">
+        <input type="file" id="file-input" multiple accept=".json,.md,.txt,.csv,.html,.htm,.pdf,.docx" />
+        <strong data-i18n="modalDrop">拖入文件或点击选择</strong>
+        <small>Word · PDF · JSON · Markdown · TXT · CSV · HTML</small>
+      </label>
+      <div class="privacy-note"><span>✓</span><p><strong data-i18n="privateByDefault">默认私有</strong><small data-i18n="privateDesc">未经你的明确许可，不会上传或用于训练。</small></p></div>
+    </div>
+  </div>
+
+  <div class="search-overlay" id="search-overlay"><div class="search-box"><span>⌕</span><input data-i18n-placeholder="searchPlaceholder" placeholder="搜索时间、人物、事件或一句话……" /><kbd>ESC</kbd></div></div>
+  <div class="toast" id="toast"><span>✓</span><p id="toast-text">已完成</p></div>
+  <div class="modal-backdrop" id="cloud-model-modal" aria-hidden="true">
+    <form class="modal cloud-model-modal" id="cloud-model-form" role="dialog" aria-modal="true" aria-labelledby="cloud-model-title">
+      <button type="button" class="modal-close" id="close-cloud-model" aria-label="Close">×</button>
+      <p class="eyebrow">OPTIONAL · FINAL INFERENCE ONLY</p><h2 id="cloud-model-title">云端模型接口</h2><p>记忆检索与 Prompt 组装仍在本机完成；开启后只发送最终 Messages。</p>
+      <label class="cloud-enabled"><input type="checkbox" id="cloud-enabled" /><span></span><p><strong>使用云端模型生成最终回答</strong><small>关闭后自动回到本地 Qwen；API Key 不写入磁盘。</small></p></label>
+      <div class="cloud-fields">
+        <label><span>Provider</span><select id="cloud-provider"><option value="openai-compatible">OpenAI Compatible</option><option value="openai">OpenAI</option><option value="deepseek">DeepSeek</option><option value="openrouter">OpenRouter</option><option value="siliconflow">SiliconFlow</option></select></label>
+        <label><span>Model</span><input id="cloud-model" placeholder="gpt-4.1-mini / deepseek-chat" /></label>
+        <label class="wide"><span>API Base URL</span><input id="cloud-base-url" type="url" placeholder="https://api.openai.com/v1" /></label>
+        <label class="wide"><span>API Key</span><input id="cloud-api-key" type="password" autocomplete="off" placeholder="仅保存在当前后端进程内存" /></label>
+        <label><span>Timeout (seconds)</span><input id="cloud-timeout" type="number" min="10" max="600" value="120" /></label>
+      </div>
+      <div class="memory-stats"><div><span>SESSIONS</span><strong id="memory-session-count">—</strong></div><div><span>TO REVIEW</span><strong id="memory-pending-count">—</strong></div><div><span>CONFIRMED</span><strong id="memory-confirmed-count">—</strong></div></div>
+      <details class="memory-review"><summary>查看对话中产生的待确认记忆</summary><div id="memory-candidate-list"><small>暂无候选记忆</small></div></details>
+      <div class="cloud-actions"><small id="cloud-config-state">LOCAL MEMORY · CLOUD OFF</small><button class="dark-button small" type="submit">保存并应用</button></div>
+    </form>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>

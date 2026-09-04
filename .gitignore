@@ -1,0 +1,46 @@
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+
+# Local runtimes and model weights
+.runtime/
+models/
+pretrained_models/
+*.gguf
+*.safetensors
+*.pt
+*.onnx
+
+# Personal LifeContext data
+data/*
+!data/README.md
+RAWDATA/*
+!RAWDATA/README.md
+
+# Voice and generated media
+*.wav
+*.pcm
+*.mp3
+*.m4a
+*.flac
+
+# Local backups and logs
+.codex-backups/
+*.log
+*.err.log
+
+# OS and editors
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
