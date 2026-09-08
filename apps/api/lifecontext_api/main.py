@@ -35,7 +35,7 @@ from .voice_profile import VoiceProfileError, VoiceProfileStore
 project_root = Path(__file__).resolve().parents[3]
 data_dir = Path(os.getenv("LIFECONTEXT_DATA_DIR", str(project_root / "data")))
 rawdata_dir = Path(os.getenv("LIFECONTEXT_RAWDATA_DIR", str(project_root / "RAWDATA")))
-frontend_dir = project_root / "FRONTEND"
+frontend_dir = project_root / "apps" / "web"
 repository = FileRepository(data_dir)
 harness = HarnessService(
     rawdata_dir,

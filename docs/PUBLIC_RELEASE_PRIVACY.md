@@ -10,7 +10,7 @@ This repository is a source-only distribution. The public tree intentionally exc
 - local model weights, CosyVoice weights, Python environments, and downloaded runtimes;
 - backups, caches, and the private repository history.
 
-The files in `FENJUEskill/` and `examples/persona-template/` are blank schemas. They do not describe a real person.
+The files in `templates/persona/` and `examples/persona-template/` are blank schemas. They do not describe a real person.
 
 ## Before every public push
 

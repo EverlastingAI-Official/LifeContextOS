@@ -21,10 +21,20 @@ sys.path.insert(0, str(COSY_ROOT))
 sys.path.insert(0, str(COSY_ROOT / "third_party" / "Matcha-TTS"))
 
 import numpy as np
+import modelscope
 import torch
 import uvicorn
 from fastapi import FastAPI, File, Form, HTTPException, UploadFile
 from fastapi.responses import StreamingResponse
+
+if os.getenv("COSYVOICE_LOCAL_ONLY", "1").strip().lower() not in {"0", "false", "no"}:
+    _snapshot_download = modelscope.snapshot_download
+
+    def _local_snapshot_download(*args, **kwargs):
+        kwargs["local_files_only"] = True
+        return _snapshot_download(*args, **kwargs)
+
+    modelscope.snapshot_download = _local_snapshot_download
 
 from cosyvoice.cli.cosyvoice import AutoModel
 from lifecontext_api.tts_segmentation import pause_seconds_after, segment_for_speech

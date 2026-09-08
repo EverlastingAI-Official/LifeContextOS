@@ -22,10 +22,8 @@ pretrained_models/
 *.onnx
 
 # Personal LifeContext data
-data/*
-!data/README.md
-RAWDATA/*
-!RAWDATA/README.md
+/data/
+/RAWDATA/
 
 # Voice and generated media
 *.wav

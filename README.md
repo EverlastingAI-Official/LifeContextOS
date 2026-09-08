@@ -201,10 +201,10 @@ http://127.0.0.1:8787/ui/
 ```text
 LifeContext-L1/
 ├─ apps/api/lifecontext_api/   # FastAPI、HARNESS、记忆与模型适配层
-├─ FRONTEND/                   # 无构建步骤的本地管理中台
+├─ apps/web/                   # 无构建步骤的本地管理中台
 ├─ RAWDATA/                    # 用户主动放入的待处理资料
 ├─ data/                       # 本地 Archive、Evidence、ThoughtCell 与配置
-├─ FENJUEskill/                # 人格基线和口述史问题
+├─ templates/persona/                # 人格基线和口述史问题
 ├─ models/                     # 本地语言模型权重（不进入 Git）
 ├─ scripts/                    # 启动、重启、下载与 CosyVoice 服务脚本
 ├─ specs/                      # LifeContext JSON Schema
@@ -246,7 +246,7 @@ LifeContext-L1/
   --app-dir apps/api --reload --host 127.0.0.1 --port 8787
 ```
 
-前端位于 `FRONTEND/`，由 FastAPI 直接提供静态文件，不需要 Node.js 构建步骤。
+前端位于 `apps/web/`，由 FastAPI 直接提供静态文件，不需要 Node.js 构建步骤。
 
 ## 路线图
 
@@ -471,10 +471,10 @@ Start the local language model or CosyVoice on demand from the Runtime Center. U
 ```text
 LifeContext-L1/
 ├─ apps/api/lifecontext_api/   # FastAPI, HARNESS, memory, and model adapters
-├─ FRONTEND/                   # Build-free local management UI
+├─ apps/web/                   # Build-free local management UI
 ├─ RAWDATA/                    # User-provided files awaiting processing
 ├─ data/                       # Local Archive, Evidence, ThoughtCells, and config
-├─ FENJUEskill/                # Persona baseline and oral-history questions
+├─ templates/persona/                # Persona baseline and oral-history questions
 ├─ models/                     # Local model weights, excluded from Git
 ├─ scripts/                    # Launch, restart, download, and voice scripts
 ├─ specs/                      # LifeContext JSON Schema
@@ -516,7 +516,7 @@ After startup, open `http://127.0.0.1:8787/docs` for the complete FastAPI-genera
   --app-dir apps/api --reload --host 127.0.0.1 --port 8787
 ```
 
-The frontend lives in `FRONTEND/` and is served directly by FastAPI. No Node.js build step is currently required.
+The frontend lives in `apps/web/` and is served directly by FastAPI. No Node.js build step is currently required.
 
 ## Roadmap
 
