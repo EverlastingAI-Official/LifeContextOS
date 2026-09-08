@@ -37,7 +37,13 @@ if os.getenv("COSYVOICE_LOCAL_ONLY", "1").strip().lower() not in {"0", "false", 
     modelscope.snapshot_download = _local_snapshot_download
 
 from cosyvoice.cli.cosyvoice import AutoModel
+from cosyvoice.cli import frontend as cosyvoice_frontend
+from cosyvoice_audio import load_wav
 from lifecontext_api.tts_segmentation import pause_seconds_after, segment_for_speech
+
+# Override only CosyVoice's reference-audio reader. Recent TorchAudio versions
+# ignore backend='soundfile' and require TorchCodec even for PCM WAV files.
+cosyvoice_frontend.load_wav = load_wav
 
 
 app = FastAPI(title="LifeContext CosyVoice Streaming Runtime")

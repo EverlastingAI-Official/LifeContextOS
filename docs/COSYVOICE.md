@@ -40,6 +40,7 @@ CosyVoice 按其官方 README 单独安装并启动 FastAPI 服务，默认地�
 
 ## 已知工程约束
 
+- 本地包装服务使用 SoundFile 读取参考 WAV，再通过 TorchAudio 重采样；避免新版 `torchaudio.load` 强制依赖 TorchCodec 导致试听失败。音频读取回归验证使用 `.runtime\cosyvoice-venv\Scripts\python.exe tests/test_cosyvoice_audio.py`。
 - 官方推理环境以 Python 3.10、Conda、SoX 和 GPU 容器为主要路径；
 - 模型权重体积和显存需求不适合随中台默认安装；
 - 上游 FastAPI 示例返回裸 `int16` PCM，本项目适配器将其包装为 22050 Hz 单声道 WAV；若更换模型导致采样率变化，需将采样率改成服务端元数据，而不是写死。
