@@ -114,7 +114,7 @@ LifeContext 不把所有数据混合进一个向量库，而是保留六个边�
 
 ### 运行环境
 
-当前一键启动流程针对 **Windows 10/11**：
+当前本地运行环境面向 **Windows 10/11**：
 
 - Python 3.11 或更高版本；
 - 管理中台与云端 API 模式不要求独立显卡；
@@ -129,17 +129,13 @@ git clone <your-repository-url>
 cd LIFECONTEXTOS-GITHUB
 ```
 
-随后双击 `START_LIFECONTEXT.cmd`。首次运行会自动创建项目自己的 `.venv`、安装 API 依赖并生成 `.env`；后续启动会直接复用该环境。如果系统尚未安装 Python，脚本可通过 Windows Package Manager 在本人确认后安装 Python 3.12。
-
-也可以先单独运行 `SETUP_LIFECONTEXT.cmd` 完成环境准备。首次安装需要网络，通常需要数分钟；本地大模型和 CosyVoice 权重不会被自动下载。
-
-偏好手动配置的开发者可以执行：
+首次安装在项目根目录执行以下命令。已有 `.env` 时请保留原配置。安装采用可编辑模式，启动入口直接使用当前源码；本地模型和 CosyVoice 权重按需下载。
 
 ```powershell
 py -3.11 -m venv .venv
 .\.venv\Scripts\python.exe -m pip install --upgrade pip
 .\.venv\Scripts\python.exe -m pip install -e ".[dev]"
-Copy-Item .env.example .env
+if (-not (Test-Path .env)) { Copy-Item .env.example .env }
 ```
 
 ### 2. 选择推理方式
@@ -157,25 +153,19 @@ Copy-Item .env.example .env
 
 ### 3. 启动 LifeContext
 
-双击：
-
-```text
-START_LIFECONTEXT.cmd
-```
-
-或者在终端运行：
+在项目根目录的 PowerShell 中运行：
 
 ```powershell
-.\.venv\Scripts\python.exe scripts\launcher.py
+.\.venv\Scripts\lifecontext.exe serve
 ```
 
-浏览器将打开：
+打开 <http://127.0.0.1:8787/ui/>。服务在前台运行，日志输出到终端，按 `Ctrl+C` 停止。重新运行同一命令即可重启 API。
 
-```text
-http://127.0.0.1:8787/ui/
-```
+开发时使用 `serve --reload`，仅监听后端源码，避免个人数据写入触发重载。支持 `--host` 和 `--port`；默认仅监听本机。入口自动读取项目 `.env`，已设置的环境变量优先。
 
-后端启动后，再从网页“运行中心”按需启动本地语言模型或 CosyVoice。修改后端代码后，可运行 `RELOAD_LIFECONTEXT_API.cmd`；需要同时重启 API 和语音服务时，可运行 `RESTART_LIFECONTEXT.cmd`。
+也可使用 `.\.venv\Scripts\python.exe -m lifecontext_api serve`。新增命令入口后，已有环境需重新执行一次 `python.exe -m pip install -e ".[dev]"`（使用上方虚拟环境内的 Python）。
+
+本地模型和 CosyVoice 在网页“运行中心”按需启动、停止或重启，API 重载不会主动结束这些独立服务。
 
 ## 第一次使用
 
@@ -382,7 +372,7 @@ Model output is never automatically promoted into personal history. Preferences,
 
 ### Requirements
 
-The current one-click workflow targets **Windows 10/11**:
+The current local runtime targets **Windows 10/11**:
 
 - Python 3.11 or newer;
 - no discrete GPU is required for the management UI or cloud API mode;
@@ -397,17 +387,13 @@ git clone <your-repository-url>
 cd LIFECONTEXTOS-GITHUB
 ```
 
-Then double-click `START_LIFECONTEXT.cmd`. On first run it creates a project-local `.venv`, installs the API dependencies, and creates `.env`; later runs reuse that environment. If Python is not installed, the script can install Python 3.12 through Windows Package Manager after asking for confirmation.
-
-You may run `SETUP_LIFECONTEXT.cmd` separately to prepare the environment first. Initial setup requires internet access and may take several minutes. Local LLM and CosyVoice weights are not downloaded automatically.
-
-Developers who prefer manual setup can run:
+Run the following commands from the project root for first-time setup. Keep your existing `.env` if present. Editable installation runs the current source checkout; model weights are downloaded separately as needed.
 
 ```powershell
 py -3.11 -m venv .venv
 .\.venv\Scripts\python.exe -m pip install --upgrade pip
 .\.venv\Scripts\python.exe -m pip install -e ".[dev]"
-Copy-Item .env.example .env
+if (-not (Test-Path .env)) { Copy-Item .env.example .env }
 ```
 
 ### 2. Choose an inference mode
@@ -425,25 +411,19 @@ If you only want an OpenAI-compatible cloud endpoint, skip the model downloads. 
 
 ### 3. Start LifeContext
 
-Double-click:
-
-```text
-START_LIFECONTEXT.cmd
-```
-
-Or run:
+Run from PowerShell in the project root:
 
 ```powershell
-.\.venv\Scripts\python.exe scripts\launcher.py
+.\.venv\Scripts\lifecontext.exe serve
 ```
 
-The application opens at:
+Open <http://127.0.0.1:8787/ui/>. Logs appear in the terminal; press `Ctrl+C` to stop. Run the same command again to restart the API.
 
-```text
-http://127.0.0.1:8787/ui/
-```
+Use `serve --reload` during development to watch backend source only. `--host` and `--port` are configurable; the default binds to localhost. The entry point reads the project `.env`; existing environment variables take precedence.
 
-Start the local language model or CosyVoice on demand from the Runtime Center. Use `RELOAD_LIFECONTEXT_API.cmd` after backend edits, or `RESTART_LIFECONTEXT.cmd` to restart both the API and voice service.
+Alternatively run `.\.venv\Scripts\python.exe -m lifecontext_api serve`. Existing installations must rerun `.\.venv\Scripts\python.exe -m pip install -e ".[dev]"` to register the new command.
+
+Start, stop, or restart model and CosyVoice services from the Runtime Center. API reload does not explicitly stop these separate services.
 
 ## First run
 

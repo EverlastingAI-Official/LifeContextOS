@@ -68,7 +68,7 @@ async function addFiles(files){
     toast(language==='zh'?`${files.length} 个文件已进入 RAWDATA`:`${files.length} files entered RAWDATA`);
     setTimeout(refreshHarness,700);
   }catch(error){
-    toast(language==='zh'?'HARNESS 未启动，请双击 START_LIFECONTEXT.cmd':'HARNESS is offline. Start LifeContext first.');
+    toast(language==='zh'?'HARNESS 未连接，请检查本地服务是否正在运行':'HARNESS is offline. Start LifeContext first.');
   }
 }
 

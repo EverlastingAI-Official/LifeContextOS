@@ -4,7 +4,7 @@
 
 ## 打开方式
 
-完整运行请双击项目根目录的 `START_LIFECONTEXT.cmd`；它会启动本地后端并打开页面。仅查看视觉原型时也可以直接双击 `index.html`。
+完整运行请在项目根目录执行 `.\.venv\Scripts\lifecontext.exe serve`，然后打开 `http://127.0.0.1:8787/ui/`。安装步骤见根目录 README。仅查看视觉原型时也可以直接双击 `index.html`。
 
 ## 已实现的原型交互
 

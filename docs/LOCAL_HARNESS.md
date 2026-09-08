@@ -2,11 +2,11 @@
 
 ## 启动
 
-双击项目根目录的 `START_LIFECONTEXT.cmd`。启动器会打开本地页面：
+完成 README 中的安装步骤后，在项目根目录执行 `.\.venv\Scripts\lifecontext.exe serve`，再打开本地页面：
 
 `http://127.0.0.1:8787/ui/`
 
-启动器只启动管理中台。点击顶部“运行中心”进入设置页，再按需启动或停止 Qwen3-4B 与 CosyVoice。Qwen 使用 GPU；CosyVoice 被强制放在 CPU 与系统内存中，首次冷启动通常需要约 30 秒。
+命令在前台启动管理中台，按 `Ctrl+C` 停止；开发时使用 `serve --reload` 自动重载后端代码。点击顶部“运行中心”进入设置页，再按需启动或停止 Qwen3-4B 与 CosyVoice。Qwen 使用 GPU；CosyVoice 被强制放在 CPU 与系统内存中，首次冷启动通常需要约 30 秒。
 
 ## 导入
 

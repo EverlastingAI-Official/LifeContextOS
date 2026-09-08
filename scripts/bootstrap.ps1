@@ -69,7 +69,7 @@ function Install-PythonWithWinget {
     Write-Host "Python 3.11 or newer was not found." -ForegroundColor Yellow
     $answer = Read-Host "Install Python 3.12 for the current user with winget? [Y/N]"
     if ($answer -notin @("Y", "y", "YES", "Yes", "yes")) {
-        throw "Setup cancelled. Install Python 3.11+ and run SETUP_LIFECONTEXT.cmd again."
+        throw "Setup cancelled. Install Python 3.11+ and run scripts\bootstrap.ps1 again."
     }
 
     $previousErrorAction = $ErrorActionPreference
@@ -94,7 +94,7 @@ if (-not (Test-Path -LiteralPath $VenvPython)) {
         $python = Find-Python
     }
     if (-not $python) {
-        throw "Python was installed but could not be located. Open a new terminal and run SETUP_LIFECONTEXT.cmd again."
+        throw "Python was installed but could not be located. Open a new terminal and run scripts\bootstrap.ps1 again."
     }
 
     Write-Host "Creating local Python environment with Python $($python.Version)..." -ForegroundColor Cyan
@@ -113,7 +113,7 @@ $ErrorActionPreference = "Continue"
 & $VenvPython -c "import fastapi,httpx,docx,pypdf,pydantic,multipart,uvicorn" 2>$null
 $dependencyExitCode = $LASTEXITCODE
 $ErrorActionPreference = $previousErrorAction
-$dependenciesReady = $dependencyExitCode -eq 0
+$dependenciesReady = ($dependencyExitCode -eq 0) -and (Test-Path -LiteralPath (Join-Path $VenvDir "Scripts\lifecontext.exe"))
 if (-not $dependenciesReady) {
     Write-Host "Installing LifeContext API dependencies. This may take a few minutes..." -ForegroundColor Cyan
     $previousErrorAction = $ErrorActionPreference
