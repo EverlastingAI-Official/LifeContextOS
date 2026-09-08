@@ -11,7 +11,7 @@ cloud model. The cloud endpoint receives only the already selected and compiled
 3. **ThoughtCell** — semantic candidates extracted from Evidence and linked back
    through `evidence_ids`.
 4. **Persona** — versionable SOUL, MEMORY and STYLE views compiled from reviewed
-   ThoughtCells and merged with the hand-curated FENJUESKILL baseline.
+   ThoughtCells and merged with the hand-curated templates/persona/ baseline.
 5. **Conversation** — append-only local turn logs, isolated by `session_id`.
 6. **Working context** — the bounded context assembled for one inference call.
 

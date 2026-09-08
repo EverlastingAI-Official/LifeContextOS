@@ -92,7 +92,7 @@ class HarnessService:
         self.mindcopy_last_run_path = self.mindcopy_dir / "last_run.json"
         self.memory = MemoryStore(self.data_dir / "memory")
         self.cloud_llm = CloudLLM(self.data_dir / "cloud" / "config.json")
-        self.fenjue_dir = self.data_dir.parent / "FENJUESKILL"
+        self.persona_template_dir = Path(__file__).resolve().parents[3] / "templates" / "persona"
         self.oral_dir = self.data_dir / "oral_history"
         self.oral_answers_path = self.oral_dir / "answers.json"
         self.model_status_path = model_status_path
@@ -425,16 +425,16 @@ class HarnessService:
         if name not in {"SOUL", "MEMORY", "STYLE"}:
             raise KeyError(document)
         source_names = {"SOUL": "soul.md", "MEMORY": "Memory.md", "STYLE": "style-guide.md"}
-        source_path = self.fenjue_dir / source_names[name]
+        source_path = self.persona_template_dir / source_names[name]
         if source_path.exists():
-            return {"document": f"{name}.md", "content": source_path.read_text(encoding="utf-8"), "updated_at": datetime.fromtimestamp(source_path.stat().st_mtime, timezone.utc).isoformat(), "source": "FENJUESKILL"}
+            return {"document": f"{name}.md", "content": source_path.read_text(encoding="utf-8"), "updated_at": datetime.fromtimestamp(source_path.stat().st_mtime, timezone.utc).isoformat(), "source": "templates/persona"}
         path = self.persona_dir / f"{name}.md"
         if not path.exists():
             self.compile_persona_documents()
         return {"document": f"{name}.md", "content": path.read_text(encoding="utf-8"), "updated_at": datetime.fromtimestamp(path.stat().st_mtime, timezone.utc).isoformat()}
 
     def oral_history_schema(self) -> list[dict[str, Any]]:
-        path = self.fenjue_dir / "oralhistory.md"
+        path = self.persona_template_dir / "oralhistory.md"
         if not path.exists():
             return []
         chapters: list[dict[str, Any]] = []
@@ -615,7 +615,7 @@ class HarnessService:
         limits = {"SOUL": 1_900, "MEMORY": 700, "STYLE": 900}
         result: dict[str, str] = {}
         for name, source_name in source_names.items():
-            source_path = self.fenjue_dir / source_name
+            source_path = self.persona_template_dir / source_name
             compiled_path = self.persona_dir / f"{name}.md"
             paths = [path for path in (source_path, compiled_path) if path.exists()]
             if not paths:
