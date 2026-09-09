@@ -18,9 +18,11 @@
 
 <a id="中文"></a>
 
+
+
 ## 中文
 
-LifeContext L1 是由 **Everlasting AI（生生科技）**构建的本地优先个人人生上下文操作系统，也是拟议 **LifeContext 开放规范**的首个参考实现。它把用户主动授权的文档、聊天记录、口述史和声音资料，转化为一条可追溯、可校正、可移植的数据链：
+LifeContext L1 是由 **Everlasting AI（生生科技)** 构建的本地优先个人人生上下文操作系统，也是拟议 **LifeContext 开放规范**的首个参考实现。它把用户主动授权的文档、聊天记录、口述史和声音资料，转化为一条可追溯、可校正、可移植的数据链：
 
 ```text
 原始资料 → Archive → Evidence → ThoughtCell → 人工审核
