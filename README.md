@@ -7,9 +7,12 @@
 ![Python](https://img.shields.io/badge/Python-3.11+-3776AB?logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-local%20API-009688?logo=fastapi&logoColor=white)
 ![Local First](https://img.shields.io/badge/architecture-local--first-2d3436)
+![On Device](https://img.shields.io/badge/runtime-fully%20on--device-6c5ce7)
+![Data Sovereignty](https://img.shields.io/badge/principle-data%20sovereignty-111111)
+![Specification Draft](https://img.shields.io/badge/LifeContext-specification%20draft-5b4bdb)
 ![License](https://img.shields.io/badge/license-TBD-lightgrey)
 
-[中文](#中文) · [English](#english) · [项目结构](#项目结构) · [Project structure](#project-structure)
+[中文](#中文) · [English](#english) · [数据主权](#数据主权与全端侧运行) · [开放规范](#lifecontext-开放规范) · [哲学基础](#哲学基础与工程路线) · [项目结构](#项目结构) · [Project structure](#project-structure)
 
 ---
 
@@ -17,16 +20,81 @@
 
 ## 中文
 
-LifeContext L1 是一个本地优先的个人人生上下文操作系统。它采集并处理用户上传的文档、聊天记录、口述史储存的意识Token，生成结构化记忆：
+LifeContext L1 是由 **Everlasting AI（生生科技）**构建的本地优先个人人生上下文操作系统，也是拟议 **LifeContext 开放规范**的首个参考实现。它把用户主动授权的文档、聊天记录、口述史和声音资料，转化为一条可追溯、可校正、可移植的数据链：
 
 ```text
 原始资料 → Archive → Evidence → ThoughtCell → 人工审核
         → SOUL / MEMORY / STYLE → Mindcopy → 对话与 Agent
 ```
 
-项目试图回答一个具体的工程问题：如果要让 AI 真正理解一个人，我们应该怎样保存个人数据，怎样区分原始证据与模型推断，又怎样让每一项人格和记忆都能够回到来源？
+项目试图回答一个具体的工程问题：如果要让 AI 真正理解一个人，我们应该怎样保存个人数据，怎样区分原始证据与模型推断，又怎样让每一项人格和记忆都能够回到来源？更进一步，跨模型、跨设备、跨应用的数字自我，能否共享一套由本人持有和治理的人生上下文格式？
 
 LifeContext 将这一目标称为 **L1 意识上传**：基于个人表达数据，重建可测试的语言风格、记忆线索、价值倾向和决策模式。L1 衡量的是行为与表达层面的相似性，**不声称主观意识已经被转移，也不证明数字代理与生物主体具有严格同一性**。
+
+Everlasting AI 是较早将“人生上下文（Life Context）”作为独立技术对象提出并持续工程化的团队之一。团队成员来自**南京大学、北京理工大学与深圳科创学院（InnoX Shenzhen）**。我们的目标不只是发布一个数字自我产品，而是为数字永生、个性化 Agent 与 L1 意识上传生态提供可以共同实现、检验和演化的基础格式。
+
+> **我们的基本立场：你的数据留在你的设备上；AI 对你的每一项理解都应该有出处；任何模型都不应垄断你的数字自我。**
+
+## 数据主权与全端侧运行
+
+LifeContext L1 可以完整运行在用户设备上。准备好运行时与模型权重后，资料导入、文档解析、内容归档、Evidence 生成、ThoughtCell 提取、本人审核、人格编译、上下文检索、本地模型推理、会话记忆与可选语音服务均可在本机完成。在本地模式中，整个操作系统从数据进入到 Mindcopy 回应都不要求个人资料离开设备，也不依赖 LifeContext 的云端服务器。
+
+| 环节 | 默认位置 | 是否需要离开设备 |
+|---|---|---|
+| 原始资料与内容归档 | 本地 | 否 |
+| Evidence 与 ThoughtCell | 本地 | 否 |
+| SOUL / MEMORY / STYLE | 本地 | 否 |
+| 检索、Prompt 组装与会话记忆 | 本地 | 否 |
+| Qwen3-4B / llama.cpp 推理 | 本地 | 否 |
+| CosyVoice 音色与语音生成 | 本地可选 | 否 |
+| OpenAI-compatible 最终推理 | 用户主动选择的服务商 | **可选；仅发送当前轮选取的 Messages** |
+
+“本地优先”在这里不是缓存策略，而是一组产品权利：
+
+- **持有权**：原始资料、记忆与人格结构由本人持有；
+- **知情权**：每项记忆和人格判断能够回到证据来源；
+- **校正权**：模型推断不会自动成为个人历史，本人可以确认、排除或保留待审核；
+- **选择权**：用户自行决定使用本地模型还是云端模型；
+- **迁移权**：人生上下文以可读、模型无关的结构保存，不与单一供应商绑定；
+- **撤回权**：授权应当具体且可撤回；覆盖派生物的可验证删除仍是项目正在建设的核心能力。
+
+## LifeContext 开放规范
+
+LifeContext L1 不只实现一套应用，也在验证一种标准化的人生上下文操作格式。拟议的 **LifeContext 1.0 开放规范**将定义个人上下文从采集到运行所需的基本对象、字段与生命周期，使采集工具、端侧设备、模型、Agent 和数字自我应用能够在明确授权下互操作。
+
+规范方向包括：
+
+1. **Provenance / 来源**：内容来自哪个文件、设备、会话、人物或采集过程；
+2. **Subject / 主体**：内容描述谁、由谁表达，避免把第三方话语归入本人；
+3. **Time / 时间**：发生时间、有效时期与认知变化，允许“过去的我”不同于“现在的我”；
+4. **Semantics / 语义**：事件、观点、偏好、关系、决定、反思和认知转折等可扩展类型；
+5. **Confidence / 不确定性**：区分原文、结构化事实与模型推断，并记录置信度；
+6. **Review / 本人审核**：`unreviewed`、`confirmed`、`excluded` 等状态及其审计轨迹；
+7. **Consent / 授权**：数据的用途、范围、期限、可见性与撤回条件；
+8. **Versioning / 演化**：人格、记忆和关系的版本、冲突、回滚与谱系；
+9. **Portability / 可移植性**：以模型无关的格式导出，并由不同运行时读取；
+10. **Deletion / 删除**：覆盖原文、索引、缓存与派生物的可验证删除语义。
+
+当前仓库中的 `specs/` 是这一规范的早期工程起点，而不是已经完成或获得行业认证的标准。我们希望通过公开 Schema、参考实现、迁移工具和评测集，与开发者、研究机构、硬件团队和数字生命应用共同迭代。
+
+从这个意义上说，LifeContext 是数字永生基础设施中的“上下文协议层”：上游连接聊天、文档、口述史、穿戴设备与未来的多模态采集；下游连接本地模型、云端模型、Agent、数字分身与拟合度评测。无论应用如何变化，个人都应继续拥有同一份可追溯的人生上下文。
+
+## 哲学基础与工程路线
+
+LifeContext 的哲学基础来自 Everlasting AI 创始人刘骁奔撰写的[《意识上传第一范式》](https://cuilingmag.com/article/the_first_paradigm_of_consciousness_uploading)。该范式将“语言作为意识的基本单位”“主体连续性作为意识上传的核心标准”，并提出从个性化语言模型到更高阶意识技术的 L1–L4 路线。
+
+在这一框架中，L1 首先处理可以被工程检验的问题：如何从本人授权的表达数据中形成数字意识体，以及如何量化它与本人在记忆、表达、价值和决策上的拟合程度。LifeContext L1 负责数据、证据、审核与运行；公开、可复现的 L1 Benchmark 将负责检验相似性与边界。
+
+同一哲学基础也启发了开源项目 [soul.md](https://github.com/aeonfun/soul.md)：以 SOUL.md、STYLE.md、MEMORY.md 等可读文件，让不同模型和 Agent 加载一个人的身份、世界观、表达方式与持续记忆。LifeContext OS 在此基础上进一步补全来源、时间、证据、审核、授权和生命周期，使人格文件从手工描述走向可追溯的人生上下文编译结果。
+
+这条 Build in Public 的工程路线可以概括为：
+
+```text
+《意识上传第一范式》 → soul.md → LifeContext L1 → L1 Benchmark → LifeContext 1.0 开放规范
+     哲学坐标          人格文件       数据与运行时       拟合度尺度          生态互操作
+```
+
+哲学为项目限定“我们在上传什么”，数据主权限定“谁拥有它”，开放规范限定“生态如何共同使用它”，Benchmark 则限定“我们如何知道它是否有效”。
 
 ### 为什么需要 LifeContext
 
@@ -48,6 +116,7 @@ LifeContext 的核心不是训练一个不可迁移的“替身模型”，而�
 | **Archive** | 按内容哈希保存原始文件快照，避免处理结果覆盖原始资料。 |
 | **Evidence** | 带来源文件、定位信息和说话者标记的证据片段。 |
 | **ThoughtCell** | 从 Evidence 中提取的事件、观点、偏好、决定、反思或认知变化。 |
+| **Consciousness Token** | 对具有来源、时间、主体、置信度与审核状态的个人上下文单元的开放统称；ThoughtCell 是当前参考实现。 |
 | **SOUL.md** | 身份、自我认知、价值观、目标和决策原则。 |
 | **MEMORY.md** | 已确认的人生经历、重要关系、项目和认知转折。 |
 | **STYLE.md** | 语言习惯、表达节奏、交流偏好和风格边界。 |
@@ -61,6 +130,7 @@ LifeContext 的核心不是训练一个不可迁移的“替身模型”，而�
 | 能力 | 状态 | 说明 |
 |---|---:|---|
 | 文件夹驱动的数据导入 | ✅ | 监听 `RAWDATA/`，也支持从网页拖入文件。 |
+| 全端侧运行 | ✅ | 整个操作系统可在本机闭环运行，包括导入、解析、提取、审核、检索、人格编译、模型对话与记忆。 |
 | 文档解析 | ✅ | 支持 TXT、Markdown、JSON、CSV、HTML、PDF 和 DOCX。 |
 | 内容哈希与原始归档 | ✅ | 原始文件进入本地 Archive，支持去重与重新处理。 |
 | Evidence 生成 | ✅ | 保存来源、定位信息和原始片段。 |
@@ -74,6 +144,7 @@ LifeContext 的核心不是训练一个不可迁移的“替身模型”，而�
 | 云端最终推理 | ✅ | 支持 OpenAI-compatible API；本地完成检索和 Prompt 组装。 |
 | 音色档案与流式语音 | 🧪 | 可连接 CosyVoice 进行授权音色克隆；GPU 环境配置仍较复杂。 |
 | L1 自动化评测 | 🚧 | 已有界面和规范方向，正式基准集与回归流水线仍在开发。 |
+| LifeContext 开放规范 | 🚧 | `specs/` 已包含早期 Schema；1.0 规范、兼容性测试与迁移工具仍在开发。 |
 | 完整导出与可验证删除 | 🚧 | 数据格式已保持可读，产品级导出/删除工作流尚未完成。 |
 | 多用户、登录和公网部署 | ❌ | 当前仅面向单机个人使用，不应直接暴露在公网。 |
 
@@ -81,25 +152,29 @@ LifeContext 的核心不是训练一个不可迁移的“替身模型”，而�
 
 ```mermaid
 flowchart LR
-    A["RAWDATA / Web Upload"] --> B["HARNESS"]
-    B --> C["Content-addressed Archive"]
-    B --> D["Evidence"]
-    D --> E["ThoughtCell Extraction"]
-    E --> F{"Human Review"}
-    F -->|Confirm| G["SOUL / MEMORY / STYLE"]
-    F -->|Reject| H["Audit Trail"]
-    G --> I["Local Retrieval & Prompt Assembly"]
-    D --> I
-    J["Conversation Memory"] --> I
-    I --> K["Local Qwen / Optional Cloud API"]
-    K --> L["Mindcopy Response + Citations"]
-    L --> J
-    L --> M["Optional CosyVoice"]
+    subgraph DEVICE["User-owned device / 用户设备"]
+        A["RAWDATA / Web Upload"] --> B["HARNESS"]
+        B --> C["Content-addressed Archive"]
+        B --> D["Evidence"]
+        D --> E["ThoughtCell Extraction"]
+        E --> F{"Human Review"}
+        F -->|Confirm| G["SOUL / MEMORY / STYLE"]
+        F -->|Reject| H["Audit Trail"]
+        G --> I["Local Retrieval & Prompt Assembly"]
+        D --> I
+        J["Conversation Memory"] --> I
+        I --> K["Local Qwen"]
+        K --> L["Mindcopy Response + Citations"]
+        L --> J
+        L --> M["Optional Local CosyVoice"]
+    end
+    I -. "Explicit opt-in: selected Messages only" .-> N["Optional Cloud API"]
+    N -.-> L
 ```
 
 ### 记忆分层
 
-LifeContext 保留六个记忆层级：
+LifeContext 不把所有数据混合进一个向量库，而是保留六个边界清晰的层级：
 
 1. **Archive**：不可变的原始资料。
 2. **Evidence**：可定位、可引用的证据片段。
@@ -119,14 +194,14 @@ LifeContext 保留六个记忆层级：
 - Python 3.11 或更高版本；
 - 管理中台与云端 API 模式不要求独立显卡；
 - 本地 Qwen3-4B 使用约 2.5 GB 的 GGUF 权重，当前启动配置为 CPU 推理；
-- CosyVoice 为可选能力，建议使用 GPU；
+- CosyVoice 为可选能力，建议使用兼容 CUDA 的 NVIDIA GPU；
 - 首次下载本地模型和运行时需要网络连接。
 
 ### 1. 获取源码并启动
 
 ```powershell
-git clone https://github.com/EverlastingAI-Official/LifeContextOS.git lifecontext
-cd lifecontext
+git clone <your-repository-url>
+cd LIFECONTEXTOS-GITHUB
 ```
 
 首次安装在项目根目录执行以下命令。已有 `.env` 时请保留原配置。安装采用可编辑模式，启动入口直接使用当前源码；本地模型和 CosyVoice 权重按需下载。
@@ -179,6 +254,8 @@ if (-not (Test-Path .env)) { Copy-Item .env.example .env }
 
 ## 数据与隐私边界
 
+- 完整核心链路可以在端侧运行；除首次下载依赖和模型权重外，本地模式的日常运行不需要外部服务。
+- LifeContext 不要求用户将人生资料上传到团队服务器，也不把云端推理设为默认前提。
 - `data/`、`models/`、`.runtime/`、`.env` 和语音文件默认被 Git 忽略。
 - 不要把真实聊天记录、音频、API Key 或未经授权的第三方资料提交到公开仓库。
 - 云端 API Key 只保存在后端进程内存，不写入 `data/cloud/config.json`；关闭云端模式或停止后端后即被清除。
@@ -240,7 +317,7 @@ LifeContext-L1/
 
 ## 路线图
 
-- [ ] 发布 LifeContext 1.0 开放数据规范与迁移工具。
+- [ ] 发布 LifeContext 1.0 开放规范、JSON Schema、兼容性测试与迁移工具。
 - [ ] 完成十年聊天记录的专用导入器、说话者识别和时间规范化。
 - [ ] 增加全文检索、向量召回、时间过滤与本地重排序的混合检索。
 - [ ] 建立公开、可复现的 L1 意识上传评价基准。
@@ -251,12 +328,19 @@ LifeContext-L1/
 
 链上身份、NFT 交易、死后自治代理和脑机接口不属于早期产品承诺，应作为独立的研究与治理议题。
 
+## 关于 Everlasting AI
+
+Everlasting AI（生生科技）是较早提出“人生上下文”概念并将其系统化工程实现的团队之一。团队成员来自南京大学、北京理工大学和深圳科创学院（InnoX Shenzhen），持续研究人工智能哲学、数字自我、个性化 Agent、端侧智能与意识上传的评估和治理。
+
+我们选择 Build in Public：公开哲学框架、人格文件实验、参考实现、Schema 与 Benchmark，让关于数字永生的宏大讨论能够被拆解为可以运行、验证、批评和共同改进的工程问题。
+
 ## 贡献
 
 欢迎围绕以下方向提交 Issue 或 Pull Request：
 
 - 聊天记录、日记、邮件和社交平台导入器；
 - Evidence 与 ThoughtCell 数据规范；
+- LifeContext Schema、授权语义、版本演化与跨运行时兼容性；
 - 本地检索、上下文压缩和记忆演化；
 - L1 评测数据集和对照实验；
 - 隐私、安全、授权、撤回与数字遗产治理；
@@ -275,16 +359,81 @@ LifeContext-L1/
 
 ## English
 
-LifeContext L1 is a local-first operating system for personal life context. It collects and processes consciousness tokens stored in user-uploaded documents, conversation logs, and oral histories to generate structured memories:
+LifeContext L1 is a local-first operating system for personal life context built by **Everlasting AI**, and the first reference implementation of the proposed **open LifeContext specification**. It turns authorized documents, conversation exports, oral histories, and voice data into a traceable, correctable, and portable chain:
 
 ```text
 Raw data → Archive → Evidence → ThoughtCell → Human review
          → SOUL / MEMORY / STYLE → Mindcopy → Conversation & Agents
 ```
 
-The project addresses a practical engineering question: if an AI is expected to understand a person over time, how should personal data be preserved, how do we separate source evidence from model inference, and how can every memory or personality claim remain traceable to its origin?
+The project addresses a practical engineering question: if an AI is expected to understand a person over time, how should personal data be preserved, how do we separate source evidence from model inference, and how can every memory or personality claim remain traceable to its origin? More broadly, can digital selves running across models, devices, and applications share a life-context format that remains owned and governed by the person?
 
 We call this scope **L1 consciousness uploading**: reconstructing testable language style, memory cues, value tendencies, and decision patterns from a person's expression data. L1 measures behavioral and expressive similarity. It **does not claim that subjective consciousness has been transferred, nor that a digital agent is strictly identical to the biological person**.
+
+Everlasting AI is among the earlier teams to define **life context** as a distinct technical object and turn it into a working system. Team members come from **Nanjing University, Beijing Institute of Technology, and InnoX Shenzhen**. Our goal extends beyond a single digital-self product: we want to provide a shared foundation for digital immortality, personalized agents, and the broader L1 consciousness-uploading ecosystem.
+
+> **Our position: your data stays on your device; every AI claim about you should be traceable; no model provider should own your digital self.**
+
+## Data sovereignty and fully on-device operation
+
+LifeContext L1 can run entirely on a user-owned device. Once the runtime and model weights are available, ingestion, parsing, archival, Evidence creation, ThoughtCell extraction, human review, persona compilation, retrieval, local inference, conversation memory, and optional voice services can all operate locally. In local mode, the operating system runs from data ingestion through Mindcopy response without personal material leaving the device or depending on an Everlasting AI cloud service.
+
+| Stage | Default location | Must data leave the device? |
+|---|---|---|
+| Raw material and content-addressed Archive | Local | No |
+| Evidence and ThoughtCells | Local | No |
+| SOUL / MEMORY / STYLE | Local | No |
+| Retrieval, prompt assembly, and conversation memory | Local | No |
+| Qwen3-4B / llama.cpp inference | Local | No |
+| CosyVoice profile and speech generation | Optional local service | No |
+| OpenAI-compatible final inference | User-selected provider | **Optional; only selected Messages for the current turn** |
+
+Here, local-first represents a set of product rights:
+
+- **Possession** — the person holds the raw sources, memories, and persona structure;
+- **Transparency** — every memory and personality claim can be traced to evidence;
+- **Correction** — model inference never becomes personal history automatically;
+- **Choice** — the person chooses local or cloud inference;
+- **Portability** — life context remains model-agnostic and readable across providers;
+- **Revocation** — consent must be specific and revocable; verifiable deletion across derived artifacts remains a core roadmap item.
+
+## The open LifeContext specification
+
+LifeContext L1 is both an application and an experiment toward a standardized life-context operating format. The proposed **LifeContext 1.0 open specification** will define the objects, fields, and lifecycle needed to move personal context from collection to runtime, allowing capture tools, edge devices, models, agents, and digital-self applications to interoperate under explicit consent.
+
+The specification direction includes:
+
+1. **Provenance** — the file, device, session, speaker, or capture process behind a record;
+2. **Subject** — who a record describes and who expressed it;
+3. **Time** — occurrence time, validity period, and cognitive change;
+4. **Semantics** — extensible types for events, claims, preferences, relationships, decisions, and reflections;
+5. **Confidence** — explicit separation of source text, structured fact, and model inference;
+6. **Review** — states such as `unreviewed`, `confirmed`, and `excluded`, with an audit trail;
+7. **Consent** — purpose, scope, duration, visibility, and revocation conditions;
+8. **Versioning** — lineage, conflict, diff, rollback, and evolution of memory and persona;
+9. **Portability** — model-independent export and loading across runtimes;
+10. **Deletion** — verifiable deletion semantics covering sources, indexes, caches, and derived artifacts.
+
+The current `specs/` directory is an early engineering starting point, not a finished or industry-certified standard. We intend to iterate in public through schemas, a reference implementation, migration tools, compatibility tests, and reproducible evaluations.
+
+In this model, LifeContext becomes the **context protocol layer** of digital-immortality infrastructure. Upstream, it connects chats, documents, oral history, wearables, and future multimodal capture. Downstream, it connects local and cloud models, agents, digital selves, and fidelity benchmarks. Applications may change; the person should retain the same traceable life context.
+
+## Philosophical foundation and engineering path
+
+LifeContext is grounded in [*The First Paradigm of Consciousness Uploading*](https://cuilingmag.com/article/the_first_paradigm_of_consciousness_uploading), written by Everlasting AI founder Liu Xiaoben. The framework treats language as a basic unit of consciousness, subject continuity as a central criterion for consciousness uploading, and proposes an L1–L4 development path.
+
+Within that framework, L1 addresses questions that can be engineered and tested today: how to construct a digital consciousness from privately authorized expression data, and how to quantify its similarity to the person across memory, expression, values, and decisions. LifeContext L1 provides the data, evidence, review, and runtime layers; a public, reproducible L1 Benchmark will test similarity and expose its limits.
+
+The same philosophical foundation also inspired the open-source [soul.md](https://github.com/aeonfun/soul.md) project. Its SOUL.md, STYLE.md, and MEMORY.md files allow different models and agents to load identity, worldview, voice, and continuity in a readable form. LifeContext OS extends that approach with provenance, time, evidence, review, consent, and lifecycle, turning persona files into outputs compiled from traceable life context.
+
+Our Build in Public path is:
+
+```text
+The First Paradigm → soul.md → LifeContext L1 → L1 Benchmark → LifeContext 1.0 open specification
+  philosophy          persona       data & runtime      fidelity metric       ecosystem interoperability
+```
+
+Philosophy defines what we are attempting to upload. Data sovereignty defines who owns it. The open specification defines how an ecosystem can use it. The Benchmark defines how we know whether it works.
 
 ### Why LifeContext
 
@@ -306,6 +455,7 @@ LifeContext is therefore not primarily an attempt to train an irreplaceable repl
 | **Archive** | Content-addressed snapshots that keep generated results from overwriting raw data. |
 | **Evidence** | Source excerpts with file, locator, and speaker metadata. |
 | **ThoughtCell** | An extracted event, claim, preference, decision, reflection, or cognitive shift. |
+| **Consciousness Token** | An open term for a personal-context unit with provenance, time, subject, confidence, and review state; ThoughtCell is the current reference implementation. |
 | **SOUL.md** | Identity, self-understanding, values, goals, and decision principles. |
 | **MEMORY.md** | Reviewed experiences, relationships, projects, and cognitive transitions. |
 | **STYLE.md** | Language habits, expression rhythm, interaction preferences, and style boundaries. |
@@ -319,6 +469,7 @@ This repository is an **alpha research prototype**. The table intentionally dist
 | Capability | Status | Notes |
 |---|---:|---|
 | Folder-driven ingestion | ✅ | Watches `RAWDATA/` and accepts browser uploads. |
+| Fully on-device operation | ✅ | The entire operating system can run locally, including ingestion, parsing, extraction, review, retrieval, persona compilation, model chat, and memory. |
 | Document parsing | ✅ | TXT, Markdown, JSON, CSV, HTML, PDF, and DOCX. |
 | Hashing and raw archive | ✅ | Local content-addressed storage and deduplication. |
 | Evidence generation | ✅ | Preserves source, locator, and raw excerpts. |
@@ -332,6 +483,7 @@ This repository is an **alpha research prototype**. The table intentionally dist
 | Optional cloud inference | ✅ | OpenAI-compatible API; retrieval and prompt assembly stay local. |
 | Voice profile and streaming TTS | 🧪 | Authorized voice cloning through CosyVoice; setup remains hardware-sensitive. |
 | Automated L1 evaluation | 🚧 | UI and design direction exist; the reproducible benchmark is in progress. |
+| Open LifeContext specification | 🚧 | Early schemas exist in `specs/`; the 1.0 spec, compatibility suite, and migration tools are in progress. |
 | Complete export and verified deletion | 🚧 | Human-readable storage exists; product workflows are not complete. |
 | Multi-user or public deployment | ❌ | This release is a single-device prototype and must not be exposed directly. |
 
@@ -339,25 +491,29 @@ This repository is an **alpha research prototype**. The table intentionally dist
 
 ```mermaid
 flowchart LR
-    A["RAWDATA / Web Upload"] --> B["HARNESS"]
-    B --> C["Content-addressed Archive"]
-    B --> D["Evidence"]
-    D --> E["ThoughtCell Extraction"]
-    E --> F{"Human Review"}
-    F -->|Confirm| G["SOUL / MEMORY / STYLE"]
-    F -->|Reject| H["Audit Trail"]
-    G --> I["Local Retrieval & Prompt Assembly"]
-    D --> I
-    J["Conversation Memory"] --> I
-    I --> K["Local Qwen / Optional Cloud API"]
-    K --> L["Mindcopy Response + Citations"]
-    L --> J
-    L --> M["Optional CosyVoice"]
+    subgraph DEVICE["User-owned device"]
+        A["RAWDATA / Web Upload"] --> B["HARNESS"]
+        B --> C["Content-addressed Archive"]
+        B --> D["Evidence"]
+        D --> E["ThoughtCell Extraction"]
+        E --> F{"Human Review"}
+        F -->|Confirm| G["SOUL / MEMORY / STYLE"]
+        F -->|Reject| H["Audit Trail"]
+        G --> I["Local Retrieval & Prompt Assembly"]
+        D --> I
+        J["Conversation Memory"] --> I
+        I --> K["Local Qwen"]
+        K --> L["Mindcopy Response + Citations"]
+        L --> J
+        L --> M["Optional Local CosyVoice"]
+    end
+    I -. "Explicit opt-in: selected Messages only" .-> N["Optional Cloud API"]
+    N -.-> L
 ```
 
 ### Memory layers
 
-LifeContext maintains six memory layers:
+LifeContext keeps six explicit memory boundaries instead of mixing everything into one vector database:
 
 1. **Archive** — immutable source material.
 2. **Evidence** — traceable and citable excerpts.
@@ -377,14 +533,14 @@ The current local runtime targets **Windows 10/11**:
 - Python 3.11 or newer;
 - no discrete GPU is required for the management UI or cloud API mode;
 - the local Qwen3-4B setup uses an approximately 2.5 GB GGUF file and currently runs on CPU;
-- CosyVoice is optional and a GPU is recommended;
+- CosyVoice is optional and an NVIDIA CUDA-capable GPU is recommended;
 - internet access is required for the initial runtime and model downloads.
 
 ### 1. Clone and start
 
 ```powershell
-git clone https://github.com/EverlastingAI-Official/LifeContextOS.git lifecontext
-cd lifecontext
+git clone <your-repository-url>
+cd LIFECONTEXTOS-GITHUB
 ```
 
 Run the following commands from the project root for first-time setup. Keep your existing `.env` if present. Editable installation runs the current source checkout; model weights are downloaded separately as needed.
@@ -437,6 +593,8 @@ Start, stop, or restart model and CosyVoice services from the Runtime Center. AP
 
 ## Data and privacy boundaries
 
+- The complete core pipeline can run on-device. Apart from initial dependency and model downloads, routine local operation requires no external service.
+- LifeContext does not require people to upload life data to an Everlasting AI server, and cloud inference is never a prerequisite.
 - `data/`, `models/`, `.runtime/`, `.env`, and voice recordings are ignored by Git by default.
 - Never commit real conversations, recordings, API keys, or third-party data without authorization.
 - Cloud API keys remain in backend process memory and are not written to `data/cloud/config.json`; they are cleared when cloud mode is disabled or the backend stops.
@@ -500,7 +658,7 @@ The frontend lives in `apps/web/` and is served directly by FastAPI. No Node.js 
 
 ## Roadmap
 
-- [ ] Publish the LifeContext 1.0 open specification and migration tools.
+- [ ] Publish the LifeContext 1.0 open specification, JSON Schema, compatibility suite, and migration tools.
 - [ ] Add a dedicated ten-year chat-history importer with speaker and time normalization.
 - [ ] Combine full-text search, embeddings, temporal filters, and local reranking.
 - [ ] Release a public and reproducible L1 consciousness-uploading benchmark.
@@ -511,12 +669,19 @@ The frontend lives in `apps/web/` and is served directly by FastAPI. No Node.js 
 
 On-chain identity, NFT trading, posthumous autonomous agents, and brain-computer interfaces are not early product promises. They should be treated as separate research and governance topics.
 
+## About Everlasting AI
+
+Everlasting AI is among the earlier teams to propose **life context** as a distinct category and implement it as a system. Team members come from Nanjing University, Beijing Institute of Technology, and InnoX Shenzhen. Our work spans AI philosophy, digital selves, personalized agents, on-device intelligence, and the evaluation and governance of consciousness uploading.
+
+We build in public: publishing the philosophical framework, persona-file experiments, reference implementation, schemas, and Benchmark so that broad claims about digital immortality can be reduced to engineering questions that others can run, test, challenge, and improve.
+
 ## Contributing
 
 Issues and pull requests are welcome in areas including:
 
 - importers for chats, journals, email, and social platforms;
 - Evidence and ThoughtCell specifications;
+- LifeContext schemas, consent semantics, version evolution, and cross-runtime compatibility;
 - local retrieval, context compression, and memory evolution;
 - L1 evaluation datasets and controlled experiments;
 - privacy, security, consent, revocation, and digital legacy governance;
