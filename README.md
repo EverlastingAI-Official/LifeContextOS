@@ -17,7 +17,7 @@
 
 ## 中文
 
-LifeContext L1 是一个本地优先的个人人生上下文操作系统。它把用户主动授权的文档、聊天记录、口述史和声音资料，转化为一条可审查的数据链：
+LifeContext L1 是一个本地优先的个人人生上下文操作系统。它采集并处理用户上传的文档、聊天记录、口述史储存的意识Token，生成结构化记忆：
 
 ```text
 原始资料 → Archive → Evidence → ThoughtCell → 人工审核
@@ -99,7 +99,7 @@ flowchart LR
 
 ### 记忆分层
 
-LifeContext 不把所有数据混合进一个向量库，而是保留六个边界清晰的层级：
+LifeContext 保留六个记忆层级：
 
 1. **Archive**：不可变的原始资料。
 2. **Evidence**：可定位、可引用的证据片段。
@@ -119,14 +119,14 @@ LifeContext 不把所有数据混合进一个向量库，而是保留六个边�
 - Python 3.11 或更高版本；
 - 管理中台与云端 API 模式不要求独立显卡；
 - 本地 Qwen3-4B 使用约 2.5 GB 的 GGUF 权重，当前启动配置为 CPU 推理；
-- CosyVoice 为可选能力，建议使用兼容 CUDA 的 NVIDIA GPU；
+- CosyVoice 为可选能力，建议使用 GPU；
 - 首次下载本地模型和运行时需要网络连接。
 
 ### 1. 获取源码并启动
 
 ```powershell
-git clone <your-repository-url>
-cd LIFECONTEXTOS-GITHUB
+git clone https://github.com/EverlastingAI-Official/LifeContextOS.git lifecontext
+cd lifecontext
 ```
 
 首次安装在项目根目录执行以下命令。已有 `.env` 时请保留原配置。安装采用可编辑模式，启动入口直接使用当前源码；本地模型和 CosyVoice 权重按需下载。
@@ -275,7 +275,7 @@ LifeContext-L1/
 
 ## English
 
-LifeContext L1 is a local-first operating system for personal life context. It turns documents, conversation exports, oral histories, and voice data that a person is authorized to use into a reviewable chain:
+LifeContext L1 is a local-first operating system for personal life context. It collects and processes consciousness tokens stored in user-uploaded documents, conversation logs, and oral histories to generate structured memories:
 
 ```text
 Raw data → Archive → Evidence → ThoughtCell → Human review
@@ -357,7 +357,7 @@ flowchart LR
 
 ### Memory layers
 
-LifeContext keeps six explicit memory boundaries instead of mixing everything into one vector database:
+LifeContext maintains six memory layers:
 
 1. **Archive** — immutable source material.
 2. **Evidence** — traceable and citable excerpts.
@@ -377,14 +377,14 @@ The current local runtime targets **Windows 10/11**:
 - Python 3.11 or newer;
 - no discrete GPU is required for the management UI or cloud API mode;
 - the local Qwen3-4B setup uses an approximately 2.5 GB GGUF file and currently runs on CPU;
-- CosyVoice is optional and an NVIDIA CUDA-capable GPU is recommended;
+- CosyVoice is optional and a GPU is recommended;
 - internet access is required for the initial runtime and model downloads.
 
 ### 1. Clone and start
 
 ```powershell
-git clone <your-repository-url>
-cd LIFECONTEXTOS-GITHUB
+git clone https://github.com/EverlastingAI-Official/LifeContextOS.git lifecontext
+cd lifecontext
 ```
 
 Run the following commands from the project root for first-time setup. Keep your existing `.env` if present. Editable installation runs the current source checkout; model weights are downloaded separately as needed.
